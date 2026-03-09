@@ -196,6 +196,7 @@ Export-PfxCertificate -Cert "cert:\CurrentUser\My\<THUMBPRINT>" -FilePath .\cert
 ## Shared Access Signature (SAS)
 - Omezený přístup k datům
 - Dočasný přístup
+- Podpis je typicky vytvořen pomocí HMAC‑SHA256
 
 ---
 
@@ -210,3 +211,4 @@ Export-PfxCertificate -Cert "cert:\CurrentUser\My\<THUMBPRINT>" -FilePath .\cert
 - Správa logů
 - Detekce anomálií
 - SIEM systémy
+- AI
