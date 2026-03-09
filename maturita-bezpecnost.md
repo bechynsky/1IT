@@ -136,13 +136,6 @@ graph TD
 - Asymetrické šifrování – veřejný + privátní klíč
 - Hashování – jedinečný otisk dat
 
-```mermaid
-flowchart LR
-    A[Symetrické šifrování<br>1 klíč] --> C[Data]
-    B[Asymetrické šifrování<br>Veřejný + privátní klíč] --> C
-    D[Hashování<br>Jednosměrné] --> C
-```
-
 ---
 
 ## Veřejný a privátní klíč
@@ -168,9 +161,11 @@ flowchart LR
 ---
 
 ## Certifikát a certifikační autority
-- Funkce certifikátů
-- Role CA
-- CA potvrzuje důvěryhodnost identity (např. domény)
+- Certifikát propojuje identitu (např. doménu) s veřejným klíčem
+- Obsahuje např. název subjektu, veřejný klíč, dobu platnosti a digitální podpis vydavatele
+- CA (certifikační autorita) ověřuje žadatele a certifikát podepisuje
+- Prohlížeč ověřuje řetězec důvěry: certifikát serveru → mezilehlá CA → kořenová CA
+- Pokud certifikát neplatí (expirace, jiná doména, nedůvěryhodná CA), spojení je označeno jako rizikové
 
 ---
 
