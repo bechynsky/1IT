@@ -32,7 +32,6 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 ---
 
 ## PIN
-- Ve Windows (Windows Hello) PIN odemyká přihlášení jen na konkrétním zařízení
 - PIN je navázaný na zařízení a chráněný lokálně (typicky přes TPM), neposílá se na server jako heslo
 - PIN nenahrazuje úplně heslo účtu: heslo je stále potřeba např. při prvním nastavení, obnově účtu nebo přihlášení na novém zařízení
 - PIN není přenositelný mezi zařízeními: na každém PC se nastavuje zvlášť
