@@ -20,6 +20,7 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 - Správa uživatelských účtů
 - Zabezpečený přístup
 - Autentizace uživatelů
+- Příklady: Microsoft Entra ID, Google Identity, Okta
 
 ---
 
@@ -28,6 +29,7 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 - Silná a jedinečná hesla
 - Pravidelná změna hesel
 - Nesdílení hesel
+- Správce hesel pomáhá ukládat silná unikátní hesla
 
 ---
 
@@ -43,6 +45,7 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 - Zvýšení bezpečnosti
 - Riziko neoprávněného přístupu
 - Biometrické ověření
+- Kombinace faktorů: něco znám (heslo), něco mám (telefon/klíč), něco jsem (biometrie)
 
 ---
 
@@ -85,6 +88,7 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 - Ochranná zeď
 - Kontrola přístupu
 - Pravidelné aktualizace
+- Filtrace příchozího i odchozího provozu podle pravidel
 
 ---
 
@@ -101,6 +105,7 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 ## Operační systémy (OS)
 - Pravidelné aktualizace
 - Zabezpečení uživatelských účtů
+- Nepoužívat nepodporované verze OS (bez bezpečnostních záplat)
 
 ---
 
@@ -132,6 +137,7 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 ## Veřejný a privátní klíč
 - Veřejný klíč – šifrování
 - Privátní klíč – dešifrování
+- Privátní klíč se používá i pro digitální podpis
 
 ---
 
@@ -153,20 +159,22 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 ## Certifikát a certifikační autority
 - Funkce certifikátů
 - Role CA
+- CA potvrzuje důvěryhodnost identity (např. domény)
 
 ---
 
 ## Self‑signed certifikát a důvěra
 - Certifikát podepsaný vlastní autoritou (ne CA), vhodný hlavně pro testování a interní prostředí
 - Omezená důvěra
+- V prohlížeči často vyvolá bezpečnostní varování
 
-### Vytvoření 
+### Vytvoření self‑signed certifikátu
 
 *OpenSSL*
 
 ```bash
 openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365 -nodes
-openssl pkcs12 -in cert.pfx -nocerts -out private.key -nodes`
+openssl pkcs12 -in cert.pfx -nocerts -out private.key -nodes
 openssl x509 -in cert.pem -pubkey -noout > public.key
 ```
 *PowerShell*
@@ -184,6 +192,7 @@ Export-PfxCertificate -Cert "cert:\CurrentUser\My\<THUMBPRINT>" -FilePath .\cert
 - Moderní hashovací funkce
 - Zajištění integrity dat
 - Ochrana hesel
+- Hash je jednosměrný (z hashe nelze jednoduše získat původní data)
 
 ---
 
@@ -212,4 +221,4 @@ Export-PfxCertificate -Cert "cert:\CurrentUser\My\<THUMBPRINT>" -FilePath .\cert
 - Správa logů
 - Detekce anomálií
 - SIEM systémy
-- AI
+- AI/ML pro rychlejší detekci podezřelého chování
