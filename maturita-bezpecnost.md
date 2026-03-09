@@ -145,9 +145,21 @@ graph TD
 
 ---
 
+## Certifikát a certifikační autority
+- Certifikát propojuje identitu (např. doménu) s veřejným klíčem
+- Obsahuje např. název subjektu, veřejný klíč, dobu platnosti a digitální podpis vydavatele
+- CA (certifikační autorita) ověřuje žadatele a certifikát podepisuje
+- Prohlížeč ověřuje řetězec důvěry: certifikát serveru → mezilehlá CA → kořenová CA
+- Pokud certifikát neplatí (expirace, jiná doména, nedůvěryhodná CA), spojení je označeno jako rizikové
+
+---
+
 ## TLS
-- Šifrování dat
+- Šifrování dat během přenosu
+    - Vytváří šifrovaný komunikační kanál mezi klientem a serverem
 - Ochrana citlivých informací
+- Asymetrická kryptografie se používá při navázání spojení (ověření identity a výměna klíče)
+- Symetrická kryptografie se pak používá pro rychlé šifrování samotných dat
 - Prevence útoků
 
 ### Přehled verzí SSL/TLS (podle roku vydání)
@@ -157,15 +169,6 @@ graph TD
 - TLS 1.1 – 2006 (zastaralé)
 - TLS 1.2 – 2008 (dlouho standard)
 - TLS 1.3 – 2018 (aktuálně doporučené)
-
----
-
-## Certifikát a certifikační autority
-- Certifikát propojuje identitu (např. doménu) s veřejným klíčem
-- Obsahuje např. název subjektu, veřejný klíč, dobu platnosti a digitální podpis vydavatele
-- CA (certifikační autorita) ověřuje žadatele a certifikát podepisuje
-- Prohlížeč ověřuje řetězec důvěry: certifikát serveru → mezilehlá CA → kořenová CA
-- Pokud certifikát neplatí (expirace, jiná doména, nedůvěryhodná CA), spojení je označeno jako rizikové
 
 ---
 
