@@ -74,13 +74,16 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 # Sítě
 
 ## Referenční model ISO/OSI
-1. Fyzická vrstva  
-2. Spojová vrstva  
-3. Síťová vrstva  
-4. Transportní vrstva  
-5. Relační vrstva  
-6. Prezentační vrstva  
-7. Aplikační vrstva
+
+```mermaid
+graph TD
+    A[7. Aplikační] --> B[6. Prezentační]
+    B --> C[5. Relační]
+    C --> D[4. Transportní]
+    D --> E[3. Síťová]
+    E --> F[2. Spojová]
+    F --> G[1. Fyzická]
+```
 
 ---
 
