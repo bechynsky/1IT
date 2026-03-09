@@ -38,6 +38,13 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 
 ---
 
+## Vícefaktorová autentizace (MFA)
+- Zvýšení bezpečnosti
+- Riziko neoprávněného přístupu
+- Biometrické ověření
+
+---
+
 ## Biometrické ověření
 - Otisky prstů
 - Rozpoznávání obličeje
@@ -45,18 +52,22 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 
 ---
 
-## Jednorázová hesla (OTP, HOTP)
-- Co jsou OTP
-- Algoritmus HOTP
+## Jednorázová hesla (OTP)
+- HOTP mění kód podle počtu použití (counter),
+- TOTP mění kód podle času (např. každých 30 s).
 
 ---
 
-## Vícefaktorová autentizace (MFA)
-- Zvýšení bezpečnosti
-- Riziko neoprávněného přístupu
-- Biometrické ověření
+## Hardwarové bezpečnostní klíče (FIDO/FIDO2)
+- Fyzický klíč (např. USB/NFC) pro silné přihlášení
+- Odolnost proti phishingu
+- Privátní klíč neopouští zařízení, server dostává jen veřejný klíč
+- Možné použití jako druhý faktor i bezheslové přihlášení (passkeys)
+- Praktické je mít i záložní klíč pro případ ztráty
 
 ---
+
+
 
 # Sítě
 
