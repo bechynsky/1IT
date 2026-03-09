@@ -24,17 +24,19 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 ---
 
 ## Hesla
+- Hesla nepoužívat, tam kde to jde
 - Silná a jedinečná hesla
 - Pravidelná změna hesel
-- Vyhnout se sdílení hesel
-- Hesla nepoužívat, tam kde to jde
+- Nesdílení hesel
 
 ---
 
 ## PIN
-- Zabezpečení pomocí PIN
-- Silné a unikátní PINy
-- Krátké vs. dlouhé PINy
+- Ve Windows (Windows Hello) PIN odemyká přihlášení jen na konkrétním zařízení
+- PIN je navázaný na zařízení a chráněný lokálně (typicky přes TPM), neposílá se na server jako heslo
+- PIN nenahrazuje úplně heslo účtu: heslo je stále potřeba např. při prvním nastavení, obnově účtu nebo přihlášení na novém zařízení
+- PIN není přenositelný mezi zařízeními: na každém PC se nastavuje zvlášť
+- Když útočník zná PIN, bez fyzického přístupu k danému zařízení ho obvykle nevyužije
 
 ---
 
