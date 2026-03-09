@@ -24,6 +24,14 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 
 ---
 
+## Autentizace přes třetí stranu (federace)
+- Místo vlastního IdP aplikace využije existujícího poskytovatele identity (např. Entra ID, Google)
+- Aplikace neukládá hesla uživatelů, jen důvěřuje ověření od externího IdP
+- Výhody: rychlejší nasazení, vyšší bezpečnost a jednodušší správa účtů
+- Běžně se používají standardy OAuth 2.0 a OpenID Connect
+
+---
+
 ## Hesla
 - Hesla nepoužívat, tam kde to jde
 - Silná a jedinečná hesla
