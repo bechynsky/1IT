@@ -27,6 +27,7 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 - Silná a jedinečná hesla
 - Pravidelná změna hesel
 - Vyhnout se sdílení hesel
+- Hesla nepoužívat, tam kde to jde
 
 ---
 
