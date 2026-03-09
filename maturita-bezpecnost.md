@@ -67,8 +67,6 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 
 ---
 
-
-
 # Sítě
 
 ## Referenční model ISO/OSI
@@ -141,6 +139,14 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 - Ochrana citlivých informací
 - Prevence útoků
 
+### Přehled verzí SSL/TLS (podle roku vydání)
+- SSL 2.0 – 1995 (zastaralé, nebezpečné)
+- SSL 3.0 – 1996 (zastaralé, nebezpečné)
+- TLS 1.0 – 1999 (zastaralé)
+- TLS 1.1 – 2006 (zastaralé)
+- TLS 1.2 – 2008 (dlouho standard)
+- TLS 1.3 – 2018 (aktuálně doporučené)
+
 ---
 
 ## Certifikát a certifikační autority
@@ -150,9 +156,24 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 ---
 
 ## Self‑signed certifikát a důvěra
-- Co je self‑signed certifikát
-- Zabezpečení komunikace
+- Certifikát podepsaný vlastní autoritou (ne CA), vhodný hlavně pro testování a interní prostředí
 - Omezená důvěra
+
+### Vytvoření 
+
+*OpenSSL*
+
+```bash
+openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365 -nodes
+openssl pkcs12 -in cert.pfx -nocerts -out private.key -nodes`
+openssl x509 -in cert.pem -pubkey -noout > public.key
+```
+*PowerShell*
+
+```powershell
+New-SelfSignedCertificate -DnsName "localhost" -CertStoreLocation "cert:\CurrentUser\My" -KeyExportPolicy Exportable
+Export-PfxCertificate -Cert "cert:\CurrentUser\My\<THUMBPRINT>" -FilePath .\cert.pfx -Password (ConvertTo-SecureString "Heslo123!" -AsPlainText -Force)
+```
 
 ---
 
