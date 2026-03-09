@@ -109,6 +109,7 @@ graph TD
 - Pravidelné aktualizace
 - Zabezpečení uživatelských účtů
 - Nepoužívat nepodporované verze OS (bez bezpečnostních záplat)
+- - Problém u domácí elktroniky
 
 ---
 
