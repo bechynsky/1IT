@@ -132,6 +132,13 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 - Asymetrické šifrování – veřejný + privátní klíč
 - Hashování – jedinečný otisk dat
 
+```mermaid
+flowchart LR
+    A[Symetrické šifrování<br>1 klíč] --> C[Data]
+    B[Asymetrické šifrování<br>Veřejný + privátní klíč] --> C
+    D[Hashování<br>Jednosměrné] --> C
+```
+
 ---
 
 ## Veřejný a privátní klíč
