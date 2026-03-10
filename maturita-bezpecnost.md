@@ -1,13 +1,4 @@
 # Bezpečnost
-```mermaid
-graph TD
-    A[Fyzická bezpečnost] --> B[Identita & přístup]
-    B --> C[Perimetr]
-    C --> D[Síť]
-    D --> E[Výpočetní prostředí]
-    E --> F[Aplikace]
-    F --> G[Data]   
-```
 
 ```mermaid
 flowchart TD
