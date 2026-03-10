@@ -8,6 +8,26 @@ graph TD
     E --> F[Aplikace]
     F --> G[Data]   
 ```
+
+```mermaid
+flowchart TD
+    A["Fyzická bezpečnost
+Základní ochrana hardware a místností: zámky, karty, kamery, ostraha a požární/klimatická ochrana v serverovnách. Bez toho jsou ostatní vrstvy k ničemu, když lze zařízení ukrást nebo zničit."]
+    B["Identita & přístup (IAM)
+Řeší, kdo jste a co smíte dělat: silná hesla, vícefaktorové ověření (MFA), role a oprávnění (least privilege), SSO/Entra ID. Každý přístup se eviduje a lze ho zrušit."]
+    C["Perimetr
+Hranice sítě vůči internetu: firewally, IDS/IPS, WAF a ochrana proti DDoS. Dnes se posouvá k principu Zero Trust – nevěř nikomu jen proto, že je „uvnitř“."]
+    D["Síť
+Bezpečný provoz uvnitř organizace: segmentace a izolace částí sítě, pravidla (ACL/NSG), filtrování a šifrování komunikace (TLS/IPsec), aby se útočník nemohl volně pohybovat."]
+    E["Výpočetní prostředí
+Ochrana serverů, virtuálek a kontejnerů: pravidelné aktualizace (patching), hardening OS, antivir/EDR a bezpečné šablony nasazení. Cílem je omezit zranitelnosti."]
+    F["Aplikace
+Bezpečný vývoj a provoz: DevSecOps v CI/CD, testy proti běžným chybám (OWASP Top 10), validace vstupů a ochrana API. Chyby v aplikaci bývají nejčastější cestou dovnitř."]
+    G["Data
+To nejdůležitější, co chráníme: šifrování při uložení i přenosu, klasifikace citlivosti, DLP (prevence úniku), zálohování a obnova. Přístup k datům má mít jen ten, kdo je skutečně potřebuje."]
+
+    A --> B --> C --> D --> E --> F --> G
+```
     
 ---
 
