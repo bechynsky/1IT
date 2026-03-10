@@ -110,15 +110,47 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 
 ## Referenční model ISO/OSI
 
-```mermaid
-graph TD
-    A[7. Aplikační] --> B[6. Prezentační]
-    B --> C[5. Relační]
-    C --> D[4. Transportní]
-    D --> E[3. Síťová]
-    E --> F[2. Spojová]
-    F --> G[1. Fyzická]
-```
+### 7. Aplikační vrstva
+- Co řeší: služby, které přímo používá uživatel nebo aplikace.
+- Příklady protokolů: HTTP/HTTPS, DNS, SMTP/IMAP, FTP/SFTP.
+- Typické hrozby: phishing, SQL injection, XSS, zneužití API.
+
+### 6. Prezentační vrstva
+- Co řeší: formát dat, převody kódování, komprese a šifrování.
+- Příklady: TLS/SSL, UTF-8/ASCII, JSON, XML, JPEG/PNG.
+- Poznámka: stará nebo špatně nastavená šifra oslabí i jinak bezpečnou komunikaci.
+
+### 5. Relační vrstva
+- Co řeší: navázání, udržení a ukončení relace mezi dvěma stranami.
+- Příklady: NetBIOS Session Service, RPC, session management ve webových aplikacích.
+- Typické problémy: session hijacking, chybné timeouty relací.
+
+### 4. Transportní vrstva
+- Co řeší: přenos dat mezi koncovými body, segmentace, spolehlivost a řízení toku.
+- Příklady protokolů: TCP, UDP, QUIC.
+- Důležité pojmy: porty (napr. 80, 443), handshake, retransmise paketů.
+- Typické hrozby: SYN flood, skenování portů, DoS na konkrétní služby.
+
+### 3. Síťová vrstva
+- Co řeší: směrování paketů mezi sítěmi.
+- Příklady protokolů: IP (IPv4/IPv6), ICMP, IPsec.
+- Zařízení: router, L3 switch.
+- Typické hrozby: IP spoofing, route hijacking, DDoS na síťové infrastruktuře.
+
+### 2. Spojová vrstva
+- Co řeší: komunikaci v rámci jedné lokální sítě, rámce a MAC adresy.
+- Příklady: Ethernet (802.3), Wi-Fi (802.11), VLAN (802.1Q), ARP.
+- Zařízení: switch, bridge, síťová karta.
+- Typické hrozby: ARP spoofing, MAC flooding, útoky na Wi-Fi (napr. slabé heslo).
+
+### 1. Fyzická vrstva
+- Co řeší: přenos bitů po médiu (kabel, optika, rádiové vlny).
+- Příklady: UTP/optické kabely, konektory, repeatery, huby.
+- Typické problémy/hrozby: poškození kabeláže, rušení signálu, odposlech fyzického média.
+
+### Rychlá pomůcka k zapamatování
+- Směr od uživatele dolů: aplikace -> data -> relace -> transport -> síť -> linka -> fyzika.
+- PDU (jednotka dat): data (L7-L5), segment/datagram (L4), paket (L3), rámec (L2), bity (L1).
 
 ---
 
