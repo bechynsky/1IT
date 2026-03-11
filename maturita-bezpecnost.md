@@ -6,7 +6,7 @@
 
 Základní ochrana hardware a místností: zámky, karty, kamery, ostraha a požární/klimatická ochrana v serverovnách. Bez toho jsou ostatní vrstvy k ničemu, když lze zařízení ukrást nebo zničit.
 
-### Identita & přístup
+### Identita a přístup
 
 Řeší, kdo jste a co smíte dělat: silná hesla, vícefaktorové ověření (MFA), role a oprávnění (least privilege), SSO/Entra ID. Každý přístup se eviduje a lze ho zrušit.
 
@@ -27,71 +27,63 @@ Ochrana serverů, virtuálek a kontejnerů: pravidelné aktualizace (patching), 
 Bezpečný vývoj a provoz: DevSecOps v CI/CD, testy proti běžným chybám (OWASP Top 10), validace vstupů a ochrana API. Chyby v aplikaci bývají nejčastější cestou dovnitř.
 
 ### Data
-    
+
 To nejdůležitější, co chráníme: šifrování při uložení i přenosu, klasifikace citlivosti, DLP (prevence úniku), zálohování a obnova. Přístup k datům má mít jen ten, kdo je skutečně potřebuje.
-    
+
+Níže jsou kapitoly přeskládané podle těchto vrstev: od fyzické ochrany až po data a průběžný monitoring.
+
 ---
 
-## Autentizace a autorizace
+## 1. Fyzická vrstva obrany
+
+### Hardware
+- Ochrana fyzických zařízení
+
+### Starý hardware
+- Hardware nemusí být schopen „upočítat“ nejnovější šifrovací algoritmy
+
+---
+
+## 2. Vrstva identity a přístupu
+
+### Autentizace a autorizace
 Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým zdrojům nebo akcím má tento uživatel přístup.
 
----
-
-## Identity provider (IdP)
+### Identity provider (IdP)
 - Správa uživatelských účtů
 - Zabezpečený přístup
 - Autentizace uživatelů
 - Příklady: Microsoft Entra ID, Google Identity, Okta
 
----
-
-## Autentizace přes třetí stranu (federace)
-- Místo vlastního IdP aplikace využije existujícího poskytovatele identity (např. Entra ID, Google)
-- Aplikace neukládá hesla uživatelů, jen důvěřuje ověření od externího IdP
-- Výhody: rychlejší nasazení, vyšší bezpečnost a jednodušší správa účtů
-- Běžně se používají standardy OAuth 2.0 a OpenID Connect
-
----
-
-## Hesla
+### Hesla
 - Hesla nepoužívat, tam kde to jde
 - Silná a jedinečná hesla
 - Pravidelná změna hesel
 - Nesdílení hesel
 - Správce hesel pomáhá ukládat silná unikátní hesla
 
----
-
-## PIN
+### PIN
 - PIN je navázaný na zařízení a chráněný lokálně (typicky přes TPM), neposílá se na server jako heslo
 - PIN nenahrazuje úplně heslo účtu: heslo je stále potřeba např. při prvním nastavení, obnově účtu nebo přihlášení na novém zařízení
 - PIN není přenositelný mezi zařízeními: na každém PC se nastavuje zvlášť
 - Když útočník zná PIN, bez fyzického přístupu k danému zařízení ho obvykle nevyužije
 
----
-
-## Vícefaktorová autentizace (MFA)
+### Vícefaktorová autentizace (MFA)
 - Zvýšení bezpečnosti
 - Riziko neoprávněného přístupu
 - Biometrické ověření
 - Kombinace faktorů: něco znám (heslo), něco mám (telefon/klíč), něco jsem (biometrie)
 
----
-
-## Biometrické ověření
+### Biometrické ověření
 - Otisky prstů
 - Rozpoznávání obličeje
 - Vyšší úroveň zabezpečení
 
----
+### Jednorázová hesla (OTP)
+- HOTP mění kód podle počtu použití (counter)
+- TOTP mění kód podle času (např. každých 30 s)
 
-## Jednorázová hesla (OTP)
-- HOTP mění kód podle počtu použití (counter),
-- TOTP mění kód podle času (např. každých 30 s).
-
----
-
-## Hardwarové bezpečnostní klíče (FIDO/FIDO2)
+### Hardwarové bezpečnostní klíče (FIDO/FIDO2)
 - Fyzický klíč (např. USB/NFC) pro silné přihlášení
 - Odolnost proti phishingu
 - Privátní klíč neopouští zařízení, server dostává jen veřejný klíč
@@ -100,88 +92,15 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 
 ---
 
-# Sítě
+## 3. Perimetrická vrstva obrany
 
-## Referenční model ISO/OSI
-
-### 7. Aplikační vrstva
-- Co řeší: služby, které přímo používá uživatel nebo aplikace.
-- Příklady protokolů: HTTP/HTTPS, DNS, SMTP/IMAP, FTP/SFTP.
-- Typické hrozby: phishing, SQL injection, XSS, zneužití API.
-
-### 6. Prezentační vrstva
-- Co řeší: formát dat, převody kódování, komprese a šifrování.
-- Příklady: TLS/SSL, UTF-8/ASCII, JSON, XML, JPEG/PNG.
-- Poznámka: stará nebo špatně nastavená šifra oslabí i jinak bezpečnou komunikaci.
-
-### 5. Relační vrstva
-- Co řeší: navázání, udržení a ukončení relace mezi dvěma stranami.
-- Příklady: NetBIOS Session Service, RPC, session management ve webových aplikacích.
-- Typické problémy: session hijacking, chybné timeouty relací.
-
-### 4. Transportní vrstva
-- Co řeší: přenos dat mezi koncovými body, segmentace, spolehlivost a řízení toku.
-- Příklady protokolů: TCP, UDP, QUIC.
-- Důležité pojmy: porty (napr. 80, 443), handshake, retransmise paketů.
-- Typické hrozby: SYN flood, skenování portů, DoS na konkrétní služby.
-
-### 3. Síťová vrstva
-- Co řeší: směrování paketů mezi sítěmi.
-- Příklady protokolů: IP (IPv4/IPv6), ICMP, IPsec.
-- Zařízení: router, L3 switch.
-- Typické hrozby: IP spoofing, route hijacking, DDoS na síťové infrastruktuře.
-
-### 2. Spojová vrstva
-- Co řeší: komunikaci v rámci jedné lokální sítě, rámce a MAC adresy.
-- Příklady: Ethernet (802.3), Wi-Fi (802.11), VLAN (802.1Q), ARP.
-- Zařízení: switch, bridge, síťová karta.
-- Typické hrozby: ARP spoofing, MAC flooding, útoky na Wi-Fi (napr. slabé heslo).
-
-### 1. Fyzická vrstva
-- Co řeší: přenos bitů po médiu (kabel, optika, rádiové vlny).
-- Příklady: UTP/optické kabely, konektory, repeatery, huby.
-- Typické problémy/hrozby: poškození kabeláže, rušení signálu, odposlech fyzického média.
-
-### Rychlá pomůcka k zapamatování
-- Směr od uživatele dolů: aplikace -> data -> relace -> transport -> síť -> linka -> fyzika.
-- PDU (jednotka dat): data (L7-L5), segment/datagram (L4), paket (L3), rámec (L2), bity (L1).
-
----
-
-## Firewall
+### Firewall
 - Ochranná zeď
 - Kontrola přístupu
 - Pravidelné aktualizace
 - Filtrace příchozího i odchozího provozu podle pravidel
 
----
-
-# Hardware a software
-
-## Hardware
-- Ochrana fyzických zařízení
-
-## Starý hardware
-- Hardware nemusí být schopen „upočítat“ nejnovější šifrovací algoritmy
-
----
-
-## Operační systémy (OS)
-- Pravidelné aktualizace
-- Zabezpečení uživatelských účtů
-- Nepoužívat nepodporované verze OS (bez bezpečnostních záplat)
-    - Problém u domácí elektroniky
-
----
-
-## Software
-- Antivirový software
-- Aktualizace softwaru
-- Skenování systému
-
----
-
-# VPN (Virtual Private Network)
+### VPN (Virtual Private Network)
 - Šifrované spojení
 - Bezpečný přenos dat
 - Ochrana před odposlechem
@@ -190,32 +109,85 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 
 ---
 
-# Šifry
+## 4. Síťová vrstva obrany
 
-## Symetrická vs. asymetrická kryptografie vs. hash
-- Symetrické šifrování – jeden klíč
-- Asymetrické šifrování – veřejný + privátní klíč
-- Hashování – jedinečný otisk dat
+### Referenční model ISO/OSI
+
+#### 7. Aplikační vrstva
+- Co řeší: služby, které přímo používá uživatel nebo aplikace.
+- Příklady protokolů: HTTP/HTTPS, DNS, SMTP/IMAP, FTP/SFTP.
+- Typické hrozby: phishing, SQL injection, XSS, zneužití API.
+
+#### 6. Prezentační vrstva
+- Co řeší: formát dat, převody kódování, komprese a šifrování.
+- Příklady: TLS/SSL, UTF-8/ASCII, JSON, XML, JPEG/PNG.
+- Poznámka: stará nebo špatně nastavená šifra oslabí i jinak bezpečnou komunikaci.
+
+#### 5. Relační vrstva
+- Co řeší: navázání, udržení a ukončení relace mezi dvěma stranami.
+- Příklady: NetBIOS Session Service, RPC, session management ve webových aplikacích.
+- Typické problémy: session hijacking, chybné timeouty relací.
+
+#### 4. Transportní vrstva
+- Co řeší: přenos dat mezi koncovými body, segmentace, spolehlivost a řízení toku.
+- Příklady protokolů: TCP, UDP, QUIC.
+- Důležité pojmy: porty (napr. 80, 443), handshake, retransmise paketů.
+- Typické hrozby: SYN flood, skenování portů, DoS na konkrétní služby.
+
+#### 3. Síťová vrstva
+- Co řeší: směrování paketů mezi sítěmi.
+- Příklady protokolů: IP (IPv4/IPv6), ICMP, IPsec.
+- Zařízení: router, L3 switch.
+- Typické hrozby: IP spoofing, route hijacking, DDoS na síťové infrastruktuře.
+
+#### 2. Spojová vrstva
+- Co řeší: komunikaci v rámci jedné lokální sítě, rámce a MAC adresy.
+- Příklady: Ethernet (802.3), Wi-Fi (802.11), VLAN (802.1Q), ARP.
+- Zařízení: switch, bridge, síťová karta.
+- Typické hrozby: ARP spoofing, MAC flooding, útoky na Wi‑Fi (napr. slabé heslo).
+
+#### 1. Fyzická vrstva
+- Co řeší: přenos bitů po médiu (kabel, optika, rádiové vlny).
+- Příklady: UTP/optické kabely, konektory, repeatery, huby.
+- Typické problémy/hrozby: poškození kabeláže, rušení signálu, odposlech fyzického média.
+
+#### Rychlá pomůcka k zapamatování
+- Směr od uživatele dolů: aplikace -> data -> relace -> transport -> síť -> linka -> fyzika.
+- PDU (jednotka dat): data (L7-L5), segment/datagram (L4), paket (L3), rámec (L2), bity (L1).
 
 ---
 
-## Veřejný a privátní klíč
-- Veřejný klíč – šifrování
-- Privátní klíč – dešifrování
-- Privátní klíč se používá i pro digitální podpis
+## 5. Vrstva výpočetního prostředí
+
+### Operační systémy (OS)
+- Pravidelné aktualizace
+- Zabezpečení uživatelských účtů
+- Nepoužívat nepodporované verze OS (bez bezpečnostních záplat)
+    - Problém u domácí elektroniky
+
+### Software
+- Antivirový software
+- Aktualizace softwaru
+- Skenování systému
 
 ---
 
-## Certifikát a certifikační autority
+## 6. Aplikační a komunikační vrstva
+
+### Autentizace přes třetí stranu (federace)
+- Místo vlastního IdP aplikace využije existujícího poskytovatele identity (např. Entra ID, Google)
+- Aplikace neukládá hesla uživatelů, jen důvěřuje ověření od externího IdP
+- Výhody: rychlejší nasazení, vyšší bezpečnost a jednodušší správa účtů
+- Běžně se používají standardy OAuth 2.0 a OpenID Connect
+
+### Certifikát a certifikační autority
 - Certifikát propojuje identitu (např. doménu) s veřejným klíčem
 - Obsahuje např. název subjektu, veřejný klíč, dobu platnosti a digitální podpis vydavatele
 - CA (certifikační autorita) ověřuje žadatele a certifikát podepisuje
-- Prohlížeč ověřuje řetězec důvěry: certifikát serveru → mezilehlá CA → kořenová CA
+- Prohlížeč ověřuje řetězec důvěry: certifikát serveru -> mezilehlá CA -> kořenová CA
 - Pokud certifikát neplatí (expirace, jiná doména, nedůvěryhodná CA), spojení je označeno jako rizikové
 
----
-
-## TLS
+### TLS
 - Šifrování dat během přenosu
     - Vytváří šifrovaný komunikační kanál mezi klientem a serverem
 - Ochrana citlivých informací
@@ -223,7 +195,7 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 - Symetrická kryptografie se pak používá pro rychlé šifrování samotných dat
 - Prevence útoků
 
-### Přehled verzí SSL/TLS (podle roku vydání)
+#### Přehled verzí SSL/TLS (podle roku vydání)
 - SSL 2.0 – 1995 (zastaralé, nebezpečné)
 - SSL 3.0 – 1996 (zastaralé, nebezpečné)
 - TLS 1.0 – 1999 (zastaralé)
@@ -231,23 +203,22 @@ Autentikace ověřuje identitu uživatele, zatímco autorizace určuje, k jakým
 - TLS 1.2 – 2008 (dlouho standard)
 - TLS 1.3 – 2018 (aktuálně doporučené)
 
----
-
-## Self‑signed certifikát a důvěra
+### Self-signed certifikát a důvěra
 - Certifikát podepsaný vlastní autoritou (ne CA), vhodný hlavně pro testování a interní prostředí
 - Omezená důvěra
 - V prohlížeči často vyvolá bezpečnostní varování
 
-### Vytvoření self‑signed certifikátu
+#### Vytvoření self-signed certifikátu
 
-*OpenSSL*
+OpenSSL
 
 ```bash
 openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365 -nodes
 openssl pkcs12 -in cert.pfx -nocerts -out private.key -nodes
 openssl x509 -in cert.pem -pubkey -noout > public.key
 ```
-*PowerShell*
+
+PowerShell
 
 ```powershell
 New-SelfSignedCertificate -DnsName "localhost" -CertStoreLocation "cert:\CurrentUser\My" -KeyExportPolicy Exportable
@@ -256,38 +227,44 @@ Export-PfxCertificate -Cert "cert:\CurrentUser\My\<THUMBPRINT>" -FilePath .\cert
 
 ---
 
-# Hashování
+## 7. Datová vrstva obrany
 
-## SHA‑256
+### Symetrická vs. asymetrická kryptografie vs. hash
+- Symetrické šifrování – jeden klíč
+- Asymetrické šifrování – veřejný + privátní klíč
+- Hashování – jedinečný otisk dat
+
+### Veřejný a privátní klíč
+- Veřejný klíč – šifrování
+- Privátní klíč – dešifrování
+- Privátní klíč se používá i pro digitální podpis
+
+### SHA‑256
 - Moderní hashovací funkce
 - Zajištění integrity dat
 - Ochrana hesel
 - Hash je jednosměrný (z hashe nelze jednoduše získat původní data)
 
----
-
-## HMAC‑SHA256
+### HMAC‑SHA256
 - Kombinace hashování a klíče
 - Ověření integrity
 - Autenticita zpráv
 
----
-
-## Shared Access Signature (SAS)
+### Shared Access Signature (SAS)
 - Omezený přístup k datům
 - Dočasný přístup
 - Podpis je typicky vytvořen pomocí HMAC‑SHA256
 
 ---
 
-# Monitoring
+## 8. Monitoring a detekce napříč vrstvami
 
-## Metody monitoringu
+### Metody monitoringu
 - Sledování síťového provozu
 - Logování událostí
 - Analýza chování uživatelů
 
-## Nástroje pro monitoring
+### Nástroje pro monitoring
 - Správa logů
 - Detekce anomálií
 - SIEM systémy
