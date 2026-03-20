@@ -6,4 +6,5 @@ Poznámky pro studenty
 
 - [Bezpečnost](./maturita-bezpecnost.md)
 - [Standardy](./maturita-standardy.md)
+- [Právo - velmi stručně](./maturita-pravo.md)
 
