@@ -5,4 +5,5 @@ Poznámky pro studenty
 ## Maturitní otázky
 
 - [Bezpečnost](./maturita-bezpecnost.md)
+- [Standardy](./maturita-standardy.md)
 
