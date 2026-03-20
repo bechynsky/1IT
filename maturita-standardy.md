@@ -4,27 +4,27 @@
 
 ### Co je standard
 
-Standard je dohodnuté pravidlo, formát nebo postup, podle kterého se vyrábí zařízení, zapisují data nebo komunikuje software. Díky tomu si různé produkty rozumí i od různých výrobců. Bez standardů by internet, kancelářské dokumenty ani bezdrátové sítě nefungovaly spolehlivě napříč zařízeními.
+Standard je dohodnuté pravidlo, formát nebo postup, podle kterého spolu zařízení a software komunikují. Díky standardům si rozumí produkty různých výrobců a data zůstávají použitelná i po letech.
 
 ### Proč jsou standardy důležité
 
-Standardy řeší interoperabilitu, bezpečnost, kvalitu a dlouhodobou udržitelnost. Umožňují, aby data šla otevřít i za několik let, aby síťová zařízení spolupracovala a aby se výrobci nemuseli domlouvat znovu od nuly na každém detailu.
+Standardy zajišťují kompatibilitu, bezpečnost, kvalitu a jednodušší správu systémů. Bez nich by internet, web ani kancelářské dokumenty nefungovaly spolehlivě napříč zařízeními.
 
-### Standard jako konkurenční výhoda i boj o trh
+### Standard jako technika i obchod
 
-Standard není jen technická dohoda, ale často i nástroj trhu. Kdo prosadí svůj formát nebo komunikační rozhraní, získá výhodu. Proto v historii vznikaly tzv. formátové války, kde ne vždy vyhrála technicky nejlepší varianta, ale ta s lepší podporou výrobců, nižší cenou nebo silnějším ekosystémem.
+Standard není jen technická dohoda, ale i konkurenční výhoda. Kdo prosadí svůj formát nebo rozhraní, může ovlivnit celý trh.
 
-Níže jsou kapitoly rozdělené od obecných principů přes organizace a síťové standardy až po formáty dat, programovací jazyky a praktický význam pro správce i vývojáře.
+Níže jsou témata uspořádaná od obecných principů přes organizace a konkrétní oblasti použití až po praktický význam standardů v IT.
 
 ---
 
-## 1. Základní principy standardizace
+## Základní principy standardizace
 
 ### Co standardizace přináší
 - Kompatibilitu mezi zařízeními a programy
 - Předvídatelné chování technologií
-- Snazší vývoj, výrobu i správu systémů
-- Levnější provoz díky široké podpoře
+- Snazší vývoj a správu systémů
+- Nižší náklady díky široké podpoře
 
 ### Typy standardů
 - De jure standardy: oficiálně schválené normy, například ISO nebo IEC
@@ -33,7 +33,7 @@ Níže jsou kapitoly rozdělené od obecných principů přes organizace a síť
 - Proprietární standardy: řídí je jedna firma nebo úzké konsorcium
 
 ### Klíčový standard lidstva
-Nejobecnějším standardem není přímo IT norma, ale jednotný systém měření. Mezinárodní soustava jednotek SI umožňuje, aby technické obory používaly stejné fyzikální jednotky po celém světě. V informatice je důležitá například sekunda pro synchronizaci času, metr pro fyzickou infrastrukturu nebo ampér a watt při návrhu napájení a hardware.
+Nejobecnějším standardem není přímo IT norma, ale jednotný systém měření. Mezinárodní soustava jednotek SI umožňuje, aby technické obory používaly stejné fyzikální jednotky po celém světě.
 
 ### Mezinárodní soustava jednotek (SI)
 - Sekunda (s) - jednotka času
@@ -46,30 +46,29 @@ Nejobecnějším standardem není přímo IT norma, ale jednotný systém měře
 
 ---
 
-## 2. Organizace, které tvoří standardy
+## Organizace, které tvoří standardy
 
 ### ISO
-Mezinárodní organizace pro standardizaci. Vydává normy napříč obory, nejen v IT. V informatice se často řeší například řízení bezpečnosti, kvality nebo dokumentových formátů.
+Mezinárodní organizace pro standardizaci. Vydává normy napříč obory, v IT například pro bezpečnost, kvalitu nebo dokumentové formáty.
 
-Mezinárodní elektrotechnická komise. Řeší elektrotechniku, elektroniku a často spolupracuje s ISO na společných normách ISO/IEC.
+### IEC
+Mezinárodní elektrotechnická komise. Zaměřuje se na elektrotechniku a elektroniku a často spolupracuje s ISO na společných normách ISO/IEC.
 
 ### IEEE
-Profesní organizace známá hlavně standardy pro počítačové sítě, elektroniku a komunikaci. Typicky sem patří rodina 802.
+Profesní organizace známá hlavně standardy pro počítačové sítě, elektroniku a komunikaci. Typicky sem patří rodina IEEE 802.
+
+### IETF
+Organizace, která vytváří internetové standardy publikované jako RFC. Právě zde vznikají klíčové síťové a aplikační protokoly internetu.
 
 ### W3C
 Konsorcium, které rozvíjí webové standardy jako HTML, CSS a přístupnost webu.
 
-### IEEE 802
-- IEEE 802.3 - Ethernet pro kabelové sítě
-- IEEE 802.1Q - VLAN, tedy logické dělení sítě
-
-### IETF a RFC
-- TCP/IP - základ komunikace v internetu
-- HTTP/HTTPS - přenos webových stránek a API komunikace
-- DHCP - automatické přidělování IP adres
-
 ### Firmy a průmyslová konsorcia
-Část standardů vzniká v praxi nejdřív u výrobců a teprve pak se formalizuje. Někdy zůstane standard pod kontrolou firem, jindy se z něj stane otevřená norma.
+Část standardů vzniká nejdřív v praxi u výrobců a teprve potom se formalizuje. Někdy zůstane standard pod kontrolou firem, jindy se z něj stane otevřená norma.
+
+---
+
+## Standardy jako nástroj konkurence
 
 ### Formátové války a soupeření technologií
 - OOXML vs. ODF
@@ -85,21 +84,52 @@ Konsorcium, které rozvíjí webové standardy jako HTML, CSS a přístupnost we
 - Jednoduchost nasazení
 - Marketing a velikost ekosystému
 
+### Praktický dopad na uživatele
+Když se trh neshodne na jednom standardu, vznikají problémy s kompatibilitou, převody dat a vyššími náklady.
+
 ---
 
-## 5. Webové standardy
+## Síťové a internetové standardy
+
+### IEEE 802
+- IEEE 802.3 - Ethernet pro kabelové sítě
+- IEEE 802.11 - Wi-Fi pro bezdrátové sítě
+- IEEE 802.1Q - VLAN, tedy logické dělení sítě
+
+### IETF a RFC
+- TCP/IP - základ komunikace v internetu
+- HTTP/HTTPS - přenos webových stránek a API komunikace
+- DNS - překlad doménových jmen na IP adresy
+- DHCP - automatické přidělování IP adres
+- SMTP, IMAP, POP3 - elektronická pošta
+
+### Proč jsou síťové standardy zásadní
+Síťové standardy zajišťují, že počítače, routery, tiskárny i mobily od různých výrobců komunikují stejným způsobem.
+
+---
+
+## Webové standardy
 
 ### HTML
 Základní jazyk pro strukturu webové stránky. Definuje nadpisy, odstavce, formuláře, tabulky, obrázky nebo odkazy.
 
 ### CSS
-Určuje vzhled stránky: barvy, rozložení, písmo, responzivitu i tiskové styly. Díky oddělení struktury a vzhledu je web přehlednější a lépe udržovatelný.
-JavaScript je programovací jazyk webu, jeho standardizovaná podoba se jmenuje ECMAScript. Standard určuje, jak se jazyk chová v prohlížečích i serverových prostředích.
+Určuje vzhled stránky: barvy, rozložení, písmo, responzivitu i tiskové styly.
 
-### WebRTC a další moderní webové technologie
+### JavaScript a ECMAScript
+JavaScript je programovací jazyk webu, jeho standardizovaná podoba se jmenuje ECMAScript.
+
+### Další webové standardy
 - DOM - standardizovaný model stránky pro práci skripty
+- WebRTC - audio, video a přenos dat v reálném čase
+- URL a URI - jednotný způsob zápisu adres zdrojů
 
-## 6. Bezpečnostní a kryptografické standardy
+### Přístupnost webu
+Webové standardy řeší i to, aby byl web použitelný pro všechny uživatele, včetně lidí se znevýhodněním.
+
+---
+
+## Bezpečnostní a kryptografické standardy
 
 ### Symetrické šifrování
 - AES - moderní standard pro rychlé šifrování dat jedním sdíleným klíčem
@@ -110,13 +140,20 @@ JavaScript je programovací jazyk webu, jeho standardizovaná podoba se jmenuje 
 
 ### Hashovací funkce
 - SHA-1 - dnes už považovaná za zastaralou
+- SHA-256 - běžný moderní standard pro integritu dat
+- SHA-3 - novější rodina hashovacích funkcí
 
 ### Standardy zabezpečené komunikace
 - TLS - zabezpečená komunikace na webu a v dalších službách
 - IPsec - zabezpečení na úrovni IP komunikace
 - X.509 - standard certifikátů pro PKI
 
-Bezpečnost nesmí stát na tajném algoritmu, ale na prověřeném návrhu a správné implementaci. Otevřeně publikované standardy procházejí kontrolou odborníků. Díky tomu se používají algoritmy, u kterých se včas odhalí slabiny a lze je nahradit novější verzí.
+### Proč jsou důležité
+V bezpečnosti je nutné používat prověřené a veřejně kontrolované standardy, ne vlastní neověřená řešení.
+
+---
+
+## Standardy dokumentů a datových formátů
 
 ### Dokumentové formáty
 - OOXML - kancelářské dokumenty Microsoft Office, norma ISO/IEC 29500
@@ -124,14 +161,17 @@ Bezpečnost nesmí stát na tajném algoritmu, ale na prověřeném návrhu a sp
 - PDF - formát pro finální distribuci dokumentů, norma ISO 32000
 
 ### Přenos a výměna dat
+- JSON - lehký formát pro API a konfiguraci
 - XML - značkovací jazyk s důrazem na strukturu a rozšiřitelnost
+- YAML - čitelný konfigurační formát
 - CSV - jednoduchý tabulkový textový formát
 
-Datový formát určuje, jak budou informace uložené a přenesené. Když je formát standardizovaný, lze data snadno sdílet mezi aplikacemi, validovat a dlouhodobě archivovat. Když je formát proprietární a špatně zdokumentovaný, hrozí závislost na jednom dodavateli.
+### Proč jsou formáty důležité
+Datový formát určuje, jak budou informace uložené a přenesené. Když je formát standardizovaný, lze data snadno sdílet mezi aplikacemi, validovat a dlouhodobě archivovat.
 
+---
 
-
-## 8. Standardy programovacích jazyků a databází
+## Standardy programovacích jazyků a databází
 
 ### Programovací jazyky s formální normou
 - C - ISO/IEC 9899
@@ -145,14 +185,14 @@ Datový formát určuje, jak budou informace uložené a přenesené. Když je f
 - ECMAScript (JavaScript) - ISO/IEC 16262
 
 ### SQL
-SQL je standardizovaný jazyk pro práci s relačními databázemi podle ISO/IEC 9075. V praxi je důležitá poznámka, že jednotlivé databázové systémy přidávají vlastní rozšíření, takže například PostgreSQL, MySQL, SQL Server nebo Oracle nejsou stoprocentně stejné.
+SQL je standardizovaný jazyk pro práci s relačními databázemi podle ISO/IEC 9075. Jednotlivé databázové systémy ho ale často rozšiřují po svém.
 
 ### Význam standardizace jazyků
-Norma pomáhá udržet jazyk konzistentní mezi různými kompilátory, interprety a platformami. Přesto je běžné, že vedle standardu existují implementační rozdíly nebo rozšíření. U maturity je dobré zdůraznit rozdíl mezi standardem jazyka a konkrétním nástrojem, který ho implementuje.
+Je důležité rozlišovat mezi standardem jazyka a konkrétní implementací nebo nástrojem.
 
 ---
 
-## 9. Standardy multimédií a grafiky
+## Standardy multimédií a grafiky
 
 ### Obrazové formáty
 - JPEG - ztrátová komprese fotografií
@@ -168,11 +208,11 @@ Norma pomáhá udržet jazyk konzistentní mezi různými kompilátory, interpre
 - H.264 nebo H.265 - standardy komprese videa
 
 ### Proč na tom záleží
-Volba formátu ovlivňuje kvalitu, velikost souboru, rychlost přenosu i podporu v programech a prohlížečích. Proto se v praxi vybírá podle účelu: fotografie, archivace, web, animace nebo profesionální tisk.
+Volba formátu ovlivňuje kvalitu, velikost souboru, rychlost přenosu i podporu v programech a prohlížečích.
 
 ---
 
-## 10. Praktický význam standardů v IT praxi
+## Praktický význam standardů v IT praxi
 
 ### Pro administrátora
 - Snazší propojení zařízení různých výrobců
@@ -192,12 +232,11 @@ Volba formátu ovlivňuje kvalitu, velikost souboru, rychlost přenosu i podporu
 ### Co si odnést k maturitě
 - Standardy umožňují interoperabilitu, bezpečnost a dlouhodobou stabilitu
 - Otevřené standardy obvykle snižují závislost na jednom dodavateli
-- Ne každý rozšířený formát je automaticky otevřený nebo vhodný pro archivaci
-- V praxi je důležité znát nejen název standardu, ale i jeho použití a limity
+- V praxi je důležité znát nejen název standardu, ale i jeho použití
 
 ---
 
-## 11. Doporučení a shrnutí
+## Shrnutí
 
 ### Dodržujte existující standardy
 - Nevynalézejte znovu kolo, pokud už existuje osvědčené řešení
@@ -206,5 +245,5 @@ Volba formátu ovlivňuje kvalitu, velikost souboru, rychlost přenosu i podporu
 - U bezpečnostních standardů sledujte, zda nejsou zastaralé
 
 ### Závěr
-IT standardy nejsou jen seznam zkratek. Jsou to pravidla, díky kterým funguje internet, dokumenty, sítě, programovací jazyky i zabezpečení. Čím lépe jim člověk rozumí, tím lépe dokáže navrhovat, spravovat a hodnotit moderní technologie.
+IT standardy nejsou jen seznam zkratek. Jsou to pravidla, díky kterým fungují internet, dokumenty, sítě, programovací jazyky i zabezpečení.
 
