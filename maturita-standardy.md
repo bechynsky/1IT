@@ -1,7 +1,3 @@
-# Základ moderních technologií: Porozumění IT standardům
-
-## Porozumění standardům, které formují výkon technologií
-
 # IT standardy
 
 ## Jak standardy drží technologie pohromadě
