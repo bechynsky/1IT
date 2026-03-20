@@ -85,7 +85,7 @@ Konsorcium, které rozvíjí webové standardy jako HTML, CSS a přístupnost we
 - Marketing a velikost ekosystému
 
 ### Praktický dopad na uživatele
-Když se trh neshodne na jednom standardu, vznikají problémy s kompatibilitou, převody dat a vyššími náklady.
+Když se trh neshodne na jednom standardu, vznikají problémy s kompatibilitou, převody dat a vyššími náklady. Uživatelé i organizace se navíc snadno dostanou do vendor lock-inu, kdy jsou závislí na jednom dodavateli a přechod jinam je složitý a drahý.
 
 ---
 
