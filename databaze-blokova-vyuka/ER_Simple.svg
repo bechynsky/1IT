@@ -1,0 +1,48 @@
+<svg width="700" height="260" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .entity { fill:#ffffff; stroke:#333; stroke-width:1.2; }
+    .header { fill:#f5a623; stroke:#333; stroke-width:1.2; }
+    .header-text { fill:white; font-family:Segoe UI, Arial; font-size:12px; font-weight:bold; }
+    .attr-text { fill:#000; font-family:Segoe UI, Arial; font-size:11px; }
+    .pk { font-weight:bold; }
+    .fk { fill:#555; font-style:italic; }
+    .rel { stroke:#333; stroke-width:2; marker-end:url(#arrow); }
+  </style>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="3" orient="auto">
+      <path d="M0,0 L10,3 L0,6 z" fill="#333" />
+    </marker>
+  </defs>
+
+  <!-- Customer -->
+  <rect x="40" y="40" width="180" height="25" class="header"/>
+  <text x="50" y="57" class="header-text">Customer</text>
+  <rect x="40" y="65" width="180" height="90" class="entity"/>
+  <text x="50" y="85" class="attr-text pk">PK CustomerID</text>
+  <text x="50" y="105" class="attr-text">FirstName</text>
+  <text x="50" y="120" class="attr-text">LastName</text>
+
+  <!-- SalesOrderHeader -->
+  <rect x="260" y="40" width="200" height="25" class="header"/>
+  <text x="270" y="57" class="header-text">SalesOrderHeader</text>
+  <rect x="260" y="65" width="200" height="110" class="entity"/>
+  <text x="270" y="85" class="attr-text pk">PK SalesOrderID</text>
+  <text x="270" y="105" class="attr-text fk">FK CustomerID</text>
+  <text x="270" y="125" class="attr-text">OrderDate</text>
+  <text x="270" y="140" class="attr-text">TotalDue</text>
+
+  <!-- SalesOrderDetail -->
+  <rect x="500" y="40" width="180" height="25" class="header"/>
+  <text x="510" y="57" class="header-text">SalesOrderDetail</text>
+  <rect x="500" y="65" width="180" height="110" class="entity"/>
+  <text x="510" y="85" class="attr-text pk">PK SalesOrderID</text>
+  <text x="510" y="100" class="attr-text pk">PK SalesOrderDetailID</text>
+  <text x="510" y="120" class="attr-text fk">FK ProductID</text>
+  <text x="510" y="135" class="attr-text">OrderQty</text>
+  <text x="510" y="150" class="attr-text">UnitPrice</text>
+
+  <!-- Relationships -->
+  <line x1="220" y1="110" x2="260" y2="110" class="rel"/>
+  <line x1="460" y1="110" x2="500" y2="110" class="rel"/>
+</svg>

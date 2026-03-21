@@ -1,0 +1,49 @@
+<svg width="700" height="320" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .entity { fill:#f9f9f9; stroke:#333; stroke-width:1.2; }
+    .header { fill:#7ed321; stroke:#333; stroke-width:1.2; }
+    .header-text { fill:white; font-family:Segoe UI, Arial; font-size:12px; font-weight:bold; }
+    .attr-text { fill:#000; font-family:Segoe UI, Arial; font-size:11px; }
+    .pk { font-weight:bold; }
+    .fk { fill:#555; font-style:italic; }
+    .rel { stroke:#333; stroke-width:2; marker-end:url(#arrow); }
+  </style>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="3" orient="auto">
+      <path d="M0,0 L10,3 L0,6 z" fill="#333" />
+    </marker>
+  </defs>
+
+  <!-- ProductCategory -->
+  <rect x="40" y="40" width="220" height="25" class="header"/>
+  <text x="50" y="57" class="header-text">SalesLT.ProductCategory</text>
+  <rect x="40" y="65" width="220" height="110" class="entity"/>
+  <text x="50" y="85" class="attr-text pk">PK ProductCategoryID</text>
+  <text x="50" y="105" class="attr-text fk">FK ParentProductCategoryID</text>
+  <text x="50" y="125" class="attr-text">Name</text>
+
+  <!-- ProductModel -->
+  <rect x="440" y="40" width="200" height="25" class="header"/>
+  <text x="450" y="57" class="header-text">SalesLT.ProductModel</text>
+  <rect x="440" y="65" width="200" height="90" class="entity"/>
+  <text x="450" y="85" class="attr-text pk">PK ProductModelID</text>
+  <text x="450" y="105" class="attr-text">Name</text>
+
+  <!-- Product -->
+  <rect x="180" y="190" width="320" height="25" class="header"/>
+  <text x="190" y="207" class="header-text">SalesLT.Product</text>
+  <rect x="180" y="215" width="320" height="140" class="entity"/>
+  <text x="190" y="235" class="attr-text pk">PK ProductID</text>
+  <text x="190" y="255" class="attr-text fk">FK ProductCategoryID → ProductCategory</text>
+  <text x="190" y="270" class="attr-text fk">FK ProductModelID → ProductModel</text>
+  <text x="190" y="290" class="attr-text">Name</text>
+  <text x="190" y="305" class="attr-text">ProductNumber</text>
+  <text x="190" y="320" class="attr-text">ListPrice</text>
+
+  <!-- Relationships -->
+  <!-- ProductCategory -> Product -->
+  <line x1="150" y1="175" x2="260" y2="215" class="rel"/>
+  <!-- ProductModel -> Product -->
+  <line x1="540" y1="155" x2="380" y2="215" class="rel"/>
+</svg>

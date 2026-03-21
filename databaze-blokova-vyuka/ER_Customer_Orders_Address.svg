@@ -1,0 +1,83 @@
+<svg width="900" height="420" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .entity { fill:#f9f9f9; stroke:#333; stroke-width:1.2; }
+    .header { fill:#4a90e2; stroke:#333; stroke-width:1.2; }
+    .header-text { fill:white; font-family:Segoe UI, Arial; font-size:12px; font-weight:bold; }
+    .attr-text { fill:#000; font-family:Segoe UI, Arial; font-size:11px; }
+    .pk { font-weight:bold; }
+    .fk { fill:#555; font-style:italic; }
+    .rel { stroke:#333; stroke-width:2; marker-end:url(#arrow); }
+  </style>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="3" orient="auto">
+      <path d="M0,0 L10,3 L0,6 z" fill="#333" />
+    </marker>
+  </defs>
+
+  <!-- Customer -->
+  <rect x="40" y="40" width="200" height="25" class="header"/>
+  <text x="50" y="57" class="header-text">SalesLT.Customer</text>
+  <rect x="40" y="65" width="200" height="120" class="entity"/>
+  <text x="50" y="85" class="attr-text pk">PK CustomerID</text>
+  <text x="50" y="105" class="attr-text">FirstName</text>
+  <text x="50" y="120" class="attr-text">LastName</text>
+  <text x="50" y="135" class="attr-text">EmailAddress</text>
+  <text x="50" y="150" class="attr-text">Phone</text>
+  <text x="50" y="165" class="attr-text">CompanyName</text>
+
+  <!-- CustomerAddress -->
+  <rect x="340" y="40" width="220" height="25" class="header"/>
+  <text x="350" y="57" class="header-text">SalesLT.CustomerAddress</text>
+  <rect x="340" y="65" width="220" height="110" class="entity"/>
+  <text x="350" y="85" class="attr-text pk">PK CustomerID</text>
+  <text x="350" y="100" class="attr-text pk">PK AddressID</text>
+  <text x="350" y="120" class="attr-text fk">FK CustomerID → Customer</text>
+  <text x="350" y="135" class="attr-text fk">FK AddressID → Address</text>
+  <text x="350" y="155" class="attr-text">AddressType</text>
+
+  <!-- Address -->
+  <rect x="680" y="40" width="200" height="25" class="header"/>
+  <text x="690" y="57" class="header-text">SalesLT.Address</text>
+  <rect x="680" y="65" width="200" height="140" class="entity"/>
+  <text x="690" y="85" class="attr-text pk">PK AddressID</text>
+  <text x="690" y="105" class="attr-text">AddressLine1</text>
+  <text x="690" y="120" class="attr-text">City</text>
+  <text x="690" y="135" class="attr-text">StateProvince</text>
+  <text x="690" y="150" class="attr-text">CountryRegion</text>
+  <text x="690" y="165" class="attr-text">PostalCode</text>
+
+  <!-- SalesOrderHeader -->
+  <rect x="200" y="230" width="260" height="25" class="header"/>
+  <text x="210" y="247" class="header-text">SalesLT.SalesOrderHeader</text>
+  <rect x="200" y="255" width="260" height="140" class="entity"/>
+  <text x="210" y="275" class="attr-text pk">PK SalesOrderID</text>
+  <text x="210" y="295" class="attr-text fk">FK CustomerID → Customer</text>
+  <text x="210" y="310" class="attr-text fk">FK ShipToAddressID → Address</text>
+  <text x="210" y="325" class="attr-text fk">FK BillToAddressID → Address</text>
+  <text x="210" y="345" class="attr-text">OrderDate</text>
+  <text x="210" y="360" class="attr-text">TotalDue</text>
+
+  <!-- SalesOrderDetail -->
+  <rect x="520" y="230" width="260" height="25" class="header"/>
+  <text x="530" y="247" class="header-text">SalesLT.SalesOrderDetail</text>
+  <rect x="520" y="255" width="260" height="140" class="entity"/>
+  <text x="530" y="275" class="attr-text pk">PK SalesOrderID</text>
+  <text x="530" y="290" class="attr-text pk">PK SalesOrderDetailID</text>
+  <text x="530" y="310" class="attr-text fk">FK SalesOrderID → Header</text>
+  <text x="530" y="325" class="attr-text fk">FK ProductID → Product</text>
+  <text x="530" y="345" class="attr-text">OrderQty</text>
+  <text x="530" y="360" class="attr-text">UnitPrice</text>
+
+  <!-- Relationships -->
+  <!-- Customer -> CustomerAddress -->
+  <line x1="240" y1="125" x2="340" y2="120" class="rel"/>
+  <!-- CustomerAddress -> Address -->
+  <line x1="560" y1="120" x2="680" y2="120" class="rel"/>
+  <!-- Customer -> SalesOrderHeader -->
+  <line x1="140" y1="185" x2="260" y2="255" class="rel"/>
+  <!-- Address -> SalesOrderHeader (Ship/Bill) -->
+  <line x1="780" y1="205" x2="380" y2="255" class="rel"/>
+  <!-- SalesOrderHeader -> SalesOrderDetail -->
+  <line x1="460" y1="325" x2="520" y2="325" class="rel"/>
+</svg>
