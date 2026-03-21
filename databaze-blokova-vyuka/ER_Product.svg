@@ -1,49 +1,39 @@
-<svg width="700" height="320" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    .entity { fill:#f9f9f9; stroke:#333; stroke-width:1.2; }
-    .header { fill:#7ed321; stroke:#333; stroke-width:1.2; }
-    .header-text { fill:white; font-family:Segoe UI, Arial; font-size:12px; font-weight:bold; }
-    .attr-text { fill:#000; font-family:Segoe UI, Arial; font-size:11px; }
-    .pk { font-weight:bold; }
-    .fk { fill:#555; font-style:italic; }
-    .rel { stroke:#333; stroke-width:2; marker-end:url(#arrow); }
-  </style>
 
-  <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="3" orient="auto">
-      <path d="M0,0 L10,3 L0,6 z" fill="#333" />
-    </marker>
-  </defs>
-
-  <!-- ProductCategory -->
-  <rect x="40" y="40" width="220" height="25" class="header"/>
-  <text x="50" y="57" class="header-text">SalesLT.ProductCategory</text>
-  <rect x="40" y="65" width="220" height="110" class="entity"/>
-  <text x="50" y="85" class="attr-text pk">PK ProductCategoryID</text>
-  <text x="50" y="105" class="attr-text fk">FK ParentProductCategoryID</text>
-  <text x="50" y="125" class="attr-text">Name</text>
-
-  <!-- ProductModel -->
-  <rect x="440" y="40" width="200" height="25" class="header"/>
-  <text x="450" y="57" class="header-text">SalesLT.ProductModel</text>
-  <rect x="440" y="65" width="200" height="90" class="entity"/>
-  <text x="450" y="85" class="attr-text pk">PK ProductModelID</text>
-  <text x="450" y="105" class="attr-text">Name</text>
-
-  <!-- Product -->
-  <rect x="180" y="190" width="320" height="25" class="header"/>
-  <text x="190" y="207" class="header-text">SalesLT.Product</text>
-  <rect x="180" y="215" width="320" height="140" class="entity"/>
-  <text x="190" y="235" class="attr-text pk">PK ProductID</text>
-  <text x="190" y="255" class="attr-text fk">FK ProductCategoryID → ProductCategory</text>
-  <text x="190" y="270" class="attr-text fk">FK ProductModelID → ProductModel</text>
-  <text x="190" y="290" class="attr-text">Name</text>
-  <text x="190" y="305" class="attr-text">ProductNumber</text>
-  <text x="190" y="320" class="attr-text">ListPrice</text>
-
-  <!-- Relationships -->
-  <!-- ProductCategory -> Product -->
-  <line x1="150" y1="175" x2="260" y2="215" class="rel"/>
-  <!-- ProductModel -> Product -->
-  <line x1="540" y1="155" x2="380" y2="215" class="rel"/>
+<svg width="700" height="380" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <marker orient="auto" refY="3" refX="10" markerHeight="10" markerWidth="10" id="arrow">
+   <path id="svg_1" fill="#333" d="m0,0l10,3l-10,3l0,-6z"/>
+  </marker>
+ </defs>
+ <!-- ProductCategory -->
+ <!-- ProductModel -->
+ <!-- Product -->
+ <!-- Relationships -->
+ <!-- ProductCategory -> Product -->
+ <!-- ProductModel -> Product -->
+ <g>
+  <title>Layer 1</title>
+  <rect id="svg_2" stroke-width="1.2" stroke="#333" fill="#7ed321" class="header" height="25" width="220" y="15" x="10"/>
+  <text id="svg_3" font-weight="bold" font-size="12px" font-family="Segoe UI, Arial" fill="white" class="header-text" y="32" x="20">SalesLT.ProductCategory</text>
+  <rect id="svg_4" stroke-width="1.2" stroke="#333" fill="#f9f9f9" class="entity" height="110" width="220" y="40" x="10"/>
+  <text id="svg_5" font-weight="bold" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text pk" y="60" x="20">PK ProductCategoryID</text>
+  <text id="svg_6" font-style="italic" font-size="11px" font-family="Segoe UI, Arial" fill="#555" class="attr-text fk" y="80" x="20">FK ParentProductCategoryID</text>
+  <text id="svg_7" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text" y="100" x="20">Name</text>
+  <rect id="svg_8" stroke-width="1.2" stroke="#333" fill="#7ed321" class="header" height="25" width="200" y="14" x="486"/>
+  <text id="svg_9" font-weight="bold" font-size="12px" font-family="Segoe UI, Arial" fill="white" class="header-text" y="31" x="496">SalesLT.ProductModel</text>
+  <rect id="svg_10" stroke-width="1.2" stroke="#333" fill="#f9f9f9" class="entity" height="90" width="200" y="39" x="486"/>
+  <text id="svg_11" font-weight="bold" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text pk" y="59" x="496">PK ProductModelID</text>
+  <text id="svg_12" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text" y="79" x="496">Name</text>
+  <rect id="svg_13" stroke-width="1.2" stroke="#333" fill="#7ed321" class="header" height="25" width="320" y="190" x="180"/>
+  <text id="svg_14" font-weight="bold" font-size="12px" font-family="Segoe UI, Arial" fill="white" class="header-text" y="207" x="190">SalesLT.Product</text>
+  <rect id="svg_15" stroke-width="1.2" stroke="#333" fill="#f9f9f9" class="entity" height="140" width="320" y="215" x="180"/>
+  <text id="svg_16" font-weight="bold" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text pk" y="235" x="190">PK ProductID</text>
+  <text id="svg_17" font-style="italic" font-size="11px" font-family="Segoe UI, Arial" fill="#555" class="attr-text fk" y="255" x="190">FK ProductCategoryID → ProductCategory</text>
+  <text id="svg_18" font-style="italic" font-size="11px" font-family="Segoe UI, Arial" fill="#555" class="attr-text fk" y="270" x="190">FK ProductModelID → ProductModel</text>
+  <text id="svg_19" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text" y="290" x="190">Name</text>
+  <text id="svg_20" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text" y="305" x="190">ProductNumber</text>
+  <text id="svg_21" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text" y="320" x="190">ListPrice</text>
+  <line id="svg_22" marker-end="url(#arrow)" stroke-width="2" stroke="#333" class="rel" y2="190" x2="230" y1="150" x1="120"/>
+  <line id="svg_23" marker-end="url(#arrow)" stroke-width="2" stroke="#333" class="rel" y2="189" x2="426" y1="129" x1="586"/>
+ </g>
 </svg>

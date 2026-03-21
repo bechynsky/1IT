@@ -1,83 +1,71 @@
-<svg width="900" height="420" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    .entity { fill:#f9f9f9; stroke:#333; stroke-width:1.2; }
-    .header { fill:#4a90e2; stroke:#333; stroke-width:1.2; }
-    .header-text { fill:white; font-family:Segoe UI, Arial; font-size:12px; font-weight:bold; }
-    .attr-text { fill:#000; font-family:Segoe UI, Arial; font-size:11px; }
-    .pk { font-weight:bold; }
-    .fk { fill:#555; font-style:italic; }
-    .rel { stroke:#333; stroke-width:2; marker-end:url(#arrow); }
-  </style>
 
-  <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="3" orient="auto">
-      <path d="M0,0 L10,3 L0,6 z" fill="#333" />
-    </marker>
-  </defs>
-
-  <!-- Customer -->
-  <rect x="40" y="40" width="200" height="25" class="header"/>
-  <text x="50" y="57" class="header-text">SalesLT.Customer</text>
-  <rect x="40" y="65" width="200" height="120" class="entity"/>
-  <text x="50" y="85" class="attr-text pk">PK CustomerID</text>
-  <text x="50" y="105" class="attr-text">FirstName</text>
-  <text x="50" y="120" class="attr-text">LastName</text>
-  <text x="50" y="135" class="attr-text">EmailAddress</text>
-  <text x="50" y="150" class="attr-text">Phone</text>
-  <text x="50" y="165" class="attr-text">CompanyName</text>
-
-  <!-- CustomerAddress -->
-  <rect x="340" y="40" width="220" height="25" class="header"/>
-  <text x="350" y="57" class="header-text">SalesLT.CustomerAddress</text>
-  <rect x="340" y="65" width="220" height="110" class="entity"/>
-  <text x="350" y="85" class="attr-text pk">PK CustomerID</text>
-  <text x="350" y="100" class="attr-text pk">PK AddressID</text>
-  <text x="350" y="120" class="attr-text fk">FK CustomerID → Customer</text>
-  <text x="350" y="135" class="attr-text fk">FK AddressID → Address</text>
-  <text x="350" y="155" class="attr-text">AddressType</text>
-
-  <!-- Address -->
-  <rect x="680" y="40" width="200" height="25" class="header"/>
-  <text x="690" y="57" class="header-text">SalesLT.Address</text>
-  <rect x="680" y="65" width="200" height="140" class="entity"/>
-  <text x="690" y="85" class="attr-text pk">PK AddressID</text>
-  <text x="690" y="105" class="attr-text">AddressLine1</text>
-  <text x="690" y="120" class="attr-text">City</text>
-  <text x="690" y="135" class="attr-text">StateProvince</text>
-  <text x="690" y="150" class="attr-text">CountryRegion</text>
-  <text x="690" y="165" class="attr-text">PostalCode</text>
-
-  <!-- SalesOrderHeader -->
-  <rect x="200" y="230" width="260" height="25" class="header"/>
-  <text x="210" y="247" class="header-text">SalesLT.SalesOrderHeader</text>
-  <rect x="200" y="255" width="260" height="140" class="entity"/>
-  <text x="210" y="275" class="attr-text pk">PK SalesOrderID</text>
-  <text x="210" y="295" class="attr-text fk">FK CustomerID → Customer</text>
-  <text x="210" y="310" class="attr-text fk">FK ShipToAddressID → Address</text>
-  <text x="210" y="325" class="attr-text fk">FK BillToAddressID → Address</text>
-  <text x="210" y="345" class="attr-text">OrderDate</text>
-  <text x="210" y="360" class="attr-text">TotalDue</text>
-
-  <!-- SalesOrderDetail -->
-  <rect x="520" y="230" width="260" height="25" class="header"/>
-  <text x="530" y="247" class="header-text">SalesLT.SalesOrderDetail</text>
-  <rect x="520" y="255" width="260" height="140" class="entity"/>
-  <text x="530" y="275" class="attr-text pk">PK SalesOrderID</text>
-  <text x="530" y="290" class="attr-text pk">PK SalesOrderDetailID</text>
-  <text x="530" y="310" class="attr-text fk">FK SalesOrderID → Header</text>
-  <text x="530" y="325" class="attr-text fk">FK ProductID → Product</text>
-  <text x="530" y="345" class="attr-text">OrderQty</text>
-  <text x="530" y="360" class="attr-text">UnitPrice</text>
-
-  <!-- Relationships -->
-  <!-- Customer -> CustomerAddress -->
-  <line x1="240" y1="125" x2="340" y2="120" class="rel"/>
-  <!-- CustomerAddress -> Address -->
-  <line x1="560" y1="120" x2="680" y2="120" class="rel"/>
-  <!-- Customer -> SalesOrderHeader -->
-  <line x1="140" y1="185" x2="260" y2="255" class="rel"/>
-  <!-- Address -> SalesOrderHeader (Ship/Bill) -->
-  <line x1="780" y1="205" x2="380" y2="255" class="rel"/>
-  <!-- SalesOrderHeader -> SalesOrderDetail -->
-  <line x1="460" y1="325" x2="520" y2="325" class="rel"/>
+<svg width="900" height="500" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <marker orient="auto" refY="3" refX="10" markerHeight="10" markerWidth="10" id="arrow">
+   <path id="svg_1" fill="#333" d="m0,0l10,3l-10,3l0,-6z"/>
+  </marker>
+ </defs>
+ <!-- Customer -->
+ <!-- CustomerAddress -->
+ <!-- Address -->
+ <!-- SalesOrderHeader -->
+ <!-- SalesOrderDetail -->
+ <!-- Relationships -->
+ <!-- Customer -> CustomerAddress -->
+ <!-- CustomerAddress -> Address -->
+ <!-- Customer -> SalesOrderHeader -->
+ <!-- Address -> SalesOrderHeader (Ship/Bill) -->
+ <!-- SalesOrderHeader -> SalesOrderDetail -->
+ <g>
+  <title>Layer 1</title>
+  <rect id="svg_2" stroke-width="1.2" stroke="#333" fill="#4a90e2" class="header" height="25" width="200" y="40" x="40"/>
+  <text id="svg_3" font-weight="bold" font-size="12px" font-family="Segoe UI, Arial" fill="white" class="header-text" y="57" x="50">SalesLT.Customer</text>
+  <rect id="svg_4" stroke-width="1.2" stroke="#333" fill="#f9f9f9" class="entity" height="120" width="200" y="65" x="40"/>
+  <text id="svg_5" font-weight="bold" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text pk" y="85" x="50">PK CustomerID</text>
+  <text id="svg_6" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text" y="105" x="50">FirstName</text>
+  <text id="svg_7" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text" y="120" x="50">LastName</text>
+  <text id="svg_8" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text" y="135" x="50">EmailAddress</text>
+  <text id="svg_9" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text" y="150" x="50">Phone</text>
+  <text id="svg_10" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text" y="165" x="50">CompanyName</text>
+  <rect id="svg_11" stroke-width="1.2" stroke="#333" fill="#4a90e2" class="header" height="25" width="220" y="40" x="340"/>
+  <text id="svg_12" font-weight="bold" font-size="12px" font-family="Segoe UI, Arial" fill="white" class="header-text" y="57" x="350">SalesLT.CustomerAddress</text>
+  <rect id="svg_13" stroke-width="1.2" stroke="#333" fill="#f9f9f9" class="entity" height="110" width="220" y="65" x="340"/>
+  <text id="svg_14" font-weight="bold" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text pk" y="85" x="350">PK CustomerID</text>
+  <text id="svg_15" font-weight="bold" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text pk" y="100" x="350">PK AddressID</text>
+  <text id="svg_16" font-style="italic" font-size="11px" font-family="Segoe UI, Arial" fill="#555" class="attr-text fk" y="120" x="350">FK CustomerID → Customer</text>
+  <text id="svg_17" font-style="italic" font-size="11px" font-family="Segoe UI, Arial" fill="#555" class="attr-text fk" y="135" x="350">FK AddressID → Address</text>
+  <text id="svg_18" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text" y="155" x="350">AddressType</text>
+  <rect id="svg_19" stroke-width="1.2" stroke="#333" fill="#4a90e2" class="header" height="25" width="200" y="40" x="680"/>
+  <text id="svg_20" font-weight="bold" font-size="12px" font-family="Segoe UI, Arial" fill="white" class="header-text" y="57" x="690">SalesLT.Address</text>
+  <rect id="svg_21" stroke-width="1.2" stroke="#333" fill="#f9f9f9" class="entity" height="140" width="200" y="65" x="680"/>
+  <text id="svg_22" font-weight="bold" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text pk" y="85" x="690">PK AddressID</text>
+  <text id="svg_23" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text" y="105" x="690">AddressLine1</text>
+  <text id="svg_24" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text" y="120" x="690">City</text>
+  <text id="svg_25" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text" y="135" x="690">StateProvince</text>
+  <text id="svg_26" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text" y="150" x="690">CountryRegion</text>
+  <text id="svg_27" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text" y="165" x="690">PostalCode</text>
+  <rect id="svg_28" stroke-width="1.2" stroke="#333" fill="#4a90e2" class="header" height="25" width="260" y="286" x="188"/>
+  <text id="svg_29" font-weight="bold" font-size="12px" font-family="Segoe UI, Arial" fill="white" class="header-text" y="303" x="198">SalesLT.SalesOrderHeader</text>
+  <rect id="svg_30" stroke-width="1.2" stroke="#333" fill="#f9f9f9" class="entity" height="140" width="260" y="311" x="188"/>
+  <text id="svg_31" font-weight="bold" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text pk" y="331" x="198">PK SalesOrderID</text>
+  <text id="svg_32" font-style="italic" font-size="11px" font-family="Segoe UI, Arial" fill="#555" class="attr-text fk" y="351" x="198">FK CustomerID → Customer</text>
+  <text id="svg_33" font-style="italic" font-size="11px" font-family="Segoe UI, Arial" fill="#555" class="attr-text fk" y="366" x="198">FK ShipToAddressID → Address</text>
+  <text id="svg_34" font-style="italic" font-size="11px" font-family="Segoe UI, Arial" fill="#555" class="attr-text fk" y="381" x="198">FK BillToAddressID → Address</text>
+  <text id="svg_35" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text" y="401" x="198">OrderDate</text>
+  <text id="svg_36" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text" y="416" x="198">TotalDue</text>
+  <rect id="svg_37" stroke-width="1.2" stroke="#333" fill="#4a90e2" class="header" height="25" width="260" y="283" x="526"/>
+  <text id="svg_38" font-weight="bold" font-size="12px" font-family="Segoe UI, Arial" fill="white" class="header-text" y="300" x="536">SalesLT.SalesOrderDetail</text>
+  <rect id="svg_39" stroke-width="1.2" stroke="#333" fill="#f9f9f9" class="entity" height="140" width="260" y="308" x="526"/>
+  <text id="svg_40" font-weight="bold" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text pk" y="328" x="536">PK SalesOrderID</text>
+  <text id="svg_41" font-weight="bold" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text pk" y="343" x="536">PK SalesOrderDetailID</text>
+  <text id="svg_42" font-style="italic" font-size="11px" font-family="Segoe UI, Arial" fill="#555" class="attr-text fk" y="363" x="536">FK SalesOrderID → Header</text>
+  <text id="svg_43" font-style="italic" font-size="11px" font-family="Segoe UI, Arial" fill="#555" class="attr-text fk" y="378" x="536">FK ProductID → Product</text>
+  <text id="svg_44" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text" y="398" x="536">OrderQty</text>
+  <text id="svg_45" font-size="11px" font-family="Segoe UI, Arial" fill="#000" class="attr-text" y="413" x="536">UnitPrice</text>
+  <line id="svg_46" marker-end="url(#arrow)" stroke-width="2" stroke="#333" class="rel" y2="120" x2="340" y1="125" x1="240"/>
+  <line id="svg_47" marker-end="url(#arrow)" stroke-width="2" stroke="#333" class="rel" y2="120" x2="680" y1="120" x1="560"/>
+  <line stroke="#333" id="svg_48" marker-end="url(#arrow)" stroke-width="2" class="rel" y2="288" x2="249" y1="187" x1="129"/>
+  <line stroke="#333" id="svg_49" marker-end="url(#arrow)" stroke-width="2" class="rel" y2="285" x2="374" y1="207" x1="721"/>
+  <line stroke="#333" id="svg_50" marker-end="url(#arrow)" stroke-width="2" class="rel" y2="368" x2="525.43903" y1="368" x1="449"/>
+ </g>
 </svg>
