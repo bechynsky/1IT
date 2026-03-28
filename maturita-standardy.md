@@ -68,6 +68,30 @@ Konsorcium, které rozvíjí webové standardy jako HTML, CSS a přístupnost we
 
 ---
 
+## ISO certifikace a normy v IT
+
+Nejznámější a nejčastěji používané ISO normy v informačních technologiích:
+
+### ISO 9001
+Systém řízení jakostí pro jakoukoliv organizaci garantující konzistentní procesy a stálou kvalitu výrobků a služeb.
+
+### ISO 27001
+Standard pro bezpečnost informací a ochranu dat, který definuje požadavky na správu bezpečnostních rizik a informačních aktiv.
+
+### ISO 27002
+Praktické bezpečnostní opatření a doporučení pro implementaci politik a postupů ochrany informací na operační úrovni.
+
+### ISO 20000
+Standard pro řízení IT služeb, pokrývající plánování, poskytování, podporu a neustálé zlepšování IT služeb v organizaci.
+
+### ISO 27035
+Specifikuje postupy pro správu a řešení incidentů související s bezpečností informací a jejich hlášení.
+
+### ISO 27037
+Guidelines pro sběr, ochranu a analýzu digitálních důkazů pro účely auditu a vyšetřování incidentů.
+
+---
+
 ## Standardy jako nástroj konkurence
 
 ### Formátové války a soupeření technologií
