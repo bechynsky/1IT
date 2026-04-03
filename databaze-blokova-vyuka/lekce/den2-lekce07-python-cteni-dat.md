@@ -11,41 +11,92 @@
 
 ## 1. Příprava prostředí (15 min)
 
-### Instalace modulu mssql-python
+### Vytvoření virtuálního prostředí (venv)
 
-Modul `mssql-python` je oficiální Microsoft driver pro přístup k SQL Serveru z Pythonu.
+Virtuální prostředí izoluje balíčky projektu od systémového Pythonu. Každý projekt má vlastní prostředí, aby se balíčky navzájem neovlivňovaly.
 
 Otevřete terminál ve VS Code (Ctrl+`) a spusťte:
 
 ```bash
-pip install mssql-python
+# Vytvoření virtuálního prostředí ve složce .venv
+python -m venv .venv
+
+# Aktivace virtuálního prostředí (Windows)
+.venv\Scripts\activate
+
+# Aktivace virtuálního prostředí (macOS/Linux)
+# source .venv/bin/activate
 ```
 
-> Pokud máte nainstalovaný Python pod jiným názvem, použijte `pip3 install mssql-python` nebo `python -m pip install mssql-python`.
+Po aktivaci uvidíte v terminálu prefix `(.venv)` – to znamená, že prostředí je aktivní.
+
+### Instalace potřebných modulů
+
+Modul `mssql-python` je oficiální Microsoft driver pro přístup k SQL Serveru z Pythonu. Modul `python-dotenv` umožňuje načítat konfiguraci ze souboru `.env`.
+
+```bash
+pip install mssql-python python-dotenv
+```
 
 ### Ověření instalace
 
 ```python
 import mssqlpython
-print("Modul mssql-python je nainstalován!")
+from dotenv import load_dotenv
+print("Všechny moduly jsou nainstalované!")
 ```
 
-### Vytvoření konfiguračního souboru
+### Vytvoření souboru .env
 
-Vytvořte soubor `config.py` s přihlašovacími údaji. Tento soubor budeme importovat v dalších skriptech:
+Soubor `.env` obsahuje přihlašovací údaje jako proměnné prostředí. Na rozdíl od vpisování hesel přímo do kódu je toto bezpečnější přístup – soubor `.env` se nikdy nenahrává na GitHub.
 
-```python
-# config.py
+Vytvořte soubor `.env` v kořenové složce projektu:
+
+```ini
+# .env
 # Přihlašovací údaje k Azure SQL Database
 # POZOR: Tento soubor nikdy nenahrávejte na GitHub ani nesdílejte!
 
-DB_SERVER = "<název-serveru>.database.windows.net"
-DB_NAME = "<název-databáze>"
-DB_USER = "studentXX"           # Nahraďte XX vaším číslem
-DB_PASSWORD = "vaše-heslo"      # Heslo od vyučujícího
+DB_SERVER=<název-serveru>.database.windows.net
+DB_NAME=<název-databáze>
+DB_USER=studentXX
+DB_PASSWORD=vaše-heslo
 ```
 
-> **Bezpečnost:** V profesionální praxi se hesla ukládají do proměnných prostředí nebo do bezpečných úložišť (Azure Key Vault). Pro školní účely použijeme konfigurační soubor, ale nikdy ho nesdílejte.
+> **Důležité:** Kolem `=` v `.env` souboru **nejsou mezery**. Hodnoty se nepíšou do uvozovek (pokud neobsahují speciální znaky).
+
+### Přidání .env do .gitignore
+
+Aby se soubor `.env` omylem neodeslal na GitHub, přidejte ho do `.gitignore`:
+
+```
+# .gitignore
+.env
+.venv/
+__pycache__/
+```
+
+### Jak se .env načítá v Pythonu
+
+V každém skriptu budeme načítat proměnné ze souboru `.env` takto:
+
+```python
+import os
+from dotenv import load_dotenv
+
+# Načtení proměnných ze souboru .env
+load_dotenv()
+
+# Přečtení jednotlivých proměnných
+DB_SERVER = os.getenv("DB_SERVER")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+```
+
+Funkce `load_dotenv()` načte soubor `.env` a nastaví jeho obsah jako proměnné prostředí. Funkce `os.getenv()` pak přečte konkrétní proměnnou.
+
+> **Bezpečnost:** Hesla patří do proměnných prostředí (`.env`), nikdy přímo do zdrojového kódu. V profesionální praxi se používají bezpečná úložiště jako Azure Key Vault.
 
 ---
 
@@ -57,20 +108,24 @@ Vytvořte soubor `01_pripojeni.py`:
 
 ```python
 # 01_pripojeni.py
+import os
+from dotenv import load_dotenv
 import mssqlpython
 
-# Přihlašovací údaje
-server = "<název-serveru>.database.windows.net"
-database = "<název-databáze>"
-user = "studentXX"
-password = "vaše-heslo"
+# Načtení proměnných ze souboru .env
+load_dotenv()
+
+DB_SERVER = os.getenv("DB_SERVER")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 # Vytvoření připojení
 connection = mssqlpython.connect(
-    server=server,
-    database=database,
-    user=user,
-    password=password
+    server=DB_SERVER,
+    database=DB_NAME,
+    user=DB_USER,
+    password=DB_PASSWORD
 )
 
 print("Připojení k databázi bylo úspěšné!")
@@ -97,11 +152,13 @@ print("Připojení uzavřeno.")
 
 ### Vysvětlení klíčových kroků
 
-1. `mssqlpython.connect(...)` – vytvoří spojení s databází
-2. `connection.cursor()` – vytvoří kurzor (objekt pro provádění dotazů)
-3. `cursor.execute(sql)` – provede SQL dotaz
-4. `cursor.fetchall()` – načte všechny řádky výsledku jako seznam
-5. `cursor.close()` a `connection.close()` – uvolní prostředky
+1. `load_dotenv()` – načte proměnné ze souboru `.env`
+2. `os.getenv("DB_SERVER")` – přečte hodnotu proměnné prostředí
+3. `mssqlpython.connect(...)` – vytvoří spojení s databází
+4. `connection.cursor()` – vytvoří kurzor (objekt pro provádění dotazů)
+5. `cursor.execute(sql)` – provede SQL dotaz
+6. `cursor.fetchall()` – načte všechny řádky výsledku jako seznam
+7. `cursor.close()` a `connection.close()` – uvolní prostředky
 
 ---
 
@@ -113,8 +170,15 @@ Vytvořte soubor `02_cteni_dat.py`:
 
 ```python
 # 02_cteni_dat.py
-from config import DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD
+import os
+from dotenv import load_dotenv
 import mssqlpython
+
+load_dotenv()
+DB_SERVER = os.getenv("DB_SERVER")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 connection = mssqlpython.connect(
     server=DB_SERVER,
@@ -170,8 +234,15 @@ connection.close()
 
 ```python
 # 03_parametry.py
-from config import DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD
+import os
+from dotenv import load_dotenv
 import mssqlpython
+
+load_dotenv()
+DB_SERVER = os.getenv("DB_SERVER")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 connection = mssqlpython.connect(
     server=DB_SERVER,
@@ -217,8 +288,15 @@ Použití `with` zajistí, že se připojení uzavře i v případě chyby. Vlas
 
 ```python
 # 04_with_pattern.py
-from config import DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD
+import os
+from dotenv import load_dotenv
 import mssqlpython
+
+load_dotenv()
+DB_SERVER = os.getenv("DB_SERVER")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 def get_connection():
     """Vytvoří a vrátí připojení k databázi."""
@@ -263,8 +341,15 @@ finally:
 
 ```python
 # 05_report_kategorie.py
-from config import DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD
+import os
+from dotenv import load_dotenv
 import mssqlpython
+
+load_dotenv()
+DB_SERVER = os.getenv("DB_SERVER")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 connection = mssqlpython.connect(
     server=DB_SERVER,
@@ -328,8 +413,15 @@ Napište skript, který zobrazí:
 
 ```python
 # Úkol 1: Vyhledávač produktů
-from config import DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD
+import os
+from dotenv import load_dotenv
 import mssqlpython
+
+load_dotenv()
+DB_SERVER = os.getenv("DB_SERVER")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 hledany_text = input("Zadejte hledaný text v názvu produktu: ")
 
@@ -360,8 +452,15 @@ connection.close()
 
 ```python
 # Úkol 2: Statistika objednávek
-from config import DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD
+import os
+from dotenv import load_dotenv
 import mssqlpython
+
+load_dotenv()
+DB_SERVER = os.getenv("DB_SERVER")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 connection = mssqlpython.connect(
     server=DB_SERVER, database=DB_NAME,
@@ -397,8 +496,11 @@ connection.close()
 
 ## Shrnutí lekce
 
+- Virtuální prostředí (`venv`) izoluje balíčky projektu od systémového Pythonu
+- Soubor `.env` uchovává přihlašovací údaje mimo zdrojový kód, `python-dotenv` je načte
 - Modul `mssql-python` umožňuje přístup k MS SQL z Pythonu
-- Postup: `connect()` → `cursor()` → `execute()` → `fetchall()/fetchone()` → `close()`
+- Postup: `load_dotenv()` → `connect()` → `cursor()` → `execute()` → `fetchall()/fetchone()` → `close()`
 - `fetchall()` vrátí všechny řádky, `fetchone()` vrátí jeden řádek
 - **Vždy používejte parametrizované dotazy** (`?`) – ochrana proti SQL injection
 - Připojení vždy uzavírejte pomocí `close()` nebo vzoru `try/finally`
+- Soubor `.env` a složku `.venv/` přidejte do `.gitignore`

@@ -17,8 +17,15 @@ Python dokáže spouštět libovolné SQL příkazy, včetně `CREATE TABLE`:
 
 ```python
 # 06_vytvoreni_tabulky.py
-from config import DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD
+import os
+from dotenv import load_dotenv
 import mssqlpython
+
+load_dotenv()
+DB_SERVER = os.getenv("DB_SERVER")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 connection = mssqlpython.connect(
     server=DB_SERVER,
@@ -64,8 +71,15 @@ Vysvětlení:
 
 ```python
 # 07_vlozeni_dat.py
-from config import DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD
+import os
+from dotenv import load_dotenv
 import mssqlpython
+
+load_dotenv()
+DB_SERVER = os.getenv("DB_SERVER")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 connection = mssqlpython.connect(
     server=DB_SERVER,
@@ -92,8 +106,15 @@ connection.close()
 
 ```python
 # 08_vlozeni_vice.py
-from config import DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD
+import os
+from dotenv import load_dotenv
 import mssqlpython
+
+load_dotenv()
+DB_SERVER = os.getenv("DB_SERVER")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 kontakty = [
     ("Eva", "Malá", "eva@email.cz", "608333444", "Kamarádka"),
@@ -140,8 +161,15 @@ connection.close()
 
 ```python
 # 09_aktualizace.py
-from config import DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD
+import os
+from dotenv import load_dotenv
 import mssqlpython
+
+load_dotenv()
+DB_SERVER = os.getenv("DB_SERVER")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 connection = mssqlpython.connect(
     server=DB_SERVER,
@@ -181,8 +209,15 @@ connection.close()
 
 ```python
 # 10_mazani.py
-from config import DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD
+import os
+from dotenv import load_dotenv
 import mssqlpython
+
+load_dotenv()
+DB_SERVER = os.getenv("DB_SERVER")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 connection = mssqlpython.connect(
     server=DB_SERVER,
@@ -226,8 +261,15 @@ Transakce zajistí, že se buď provedou **všechny** změny, nebo **žádná**.
 
 ```python
 # 11_transakce.py
-from config import DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD
+import os
+from dotenv import load_dotenv
 import mssqlpython
+
+load_dotenv()
+DB_SERVER = os.getenv("DB_SERVER")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 connection = mssqlpython.connect(
     server=DB_SERVER,
@@ -308,8 +350,15 @@ Vytvořte kompletní aplikaci pro správu kontaktů s textovým menu:
 
 ```python
 # projekt_kontakty.py
-from config import DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD
+import os
+from dotenv import load_dotenv
 import mssqlpython
+
+load_dotenv()
+DB_SERVER = os.getenv("DB_SERVER")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 # Nahraďte XX vaším číslem
 SCHEMA = "studentXX"
