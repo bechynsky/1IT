@@ -34,3 +34,52 @@ Dvoudenní bloková výuka (8 lekcí × 90 minut) zaměřená na úvod do relač
 
 ## Vytvoření prostředí
 
+Příprava prostředí se skládá ze tří kroků. Všechny potřebné skripty jsou ve složce [`setup/`](setup/).
+
+### Krok 1: Vytvoření Azure SQL Serveru a databáze
+
+Skript [`setup/database_setup.ps1`](setup/database_setup.ps1) vytvoří resource group, Azure SQL logical server s firewall pravidlem a databázi AdventureWorksLT. Vyžaduje nainstalovaný modul `Az` pro PowerShell a přihlášení do Azure (`Connect-AzAccount`).
+
+```powershell
+.\setup\database_setup.ps1 `
+    -resourceGroup "RG-Database-Lab" `
+    -location "westeurope" `
+    -sqlServerName "sql-lab-server-001" `
+    -sqlAdminUser "sqladmin" `
+    -databaseName "AdventureWorksLT" `
+    -allowIPRange "10.1.0.0/24"
+```
+
+Parametry:
+
+| Parametr | Popis |
+|---|---|
+| `resourceGroup` | Název Azure resource group |
+| `location` | Azure region (např. `westeurope`) |
+| `sqlServerName` | Globálně unikátní název SQL serveru |
+| `sqlAdminUser` | Uživatelské jméno administrátora |
+| `databaseName` | Název databáze |
+| `allowIPRange` | Povolený rozsah IP adres ve formátu CIDR (např. IP adresa školní sítě) |
+
+Skript se interaktivně zeptá na heslo administrátora.
+
+### Krok 2: Vytvoření studentských účtů
+
+Po vytvoření databáze spusťte skript [`setup/database_setup.sql`](setup/database_setup.sql) proti vytvořené databázi (např. přes VS Code s rozšířením mssql nebo přes Azure Portal Query Editor). Skript:
+
+1. Vytvoří roli `db_students` s oprávněním `SELECT` na schéma `SalesLT`
+2. Pro každého studenta vytvoří contained uživatele s náhodným heslem
+3. Každému studentovi vytvoří vlastní schéma (`student01`, `student02`, ...) s oprávněním vytvářet tabulky, pohledy a procedury
+4. Na konci vypíše tabulku s přihlašovacími údaji (uživatel + heslo) pro distribuci studentům
+
+Počet studentů a prefix uživatelských jmen lze upravit na začátku skriptu:
+
+```sql
+DECLARE @UserCount INT = 10;        -- počet studentů
+DECLARE @UserPrefix SYSNAME = N'student';  -- prefix jména (student01, student02, ...)
+```
+
+### Krok 3 (volitelné): Vytvoření read-only uživatele
+
+Skript [`setup/add_readonly_user.sql`](setup/add_readonly_user.sql) vytvoří uživatele s oprávněním pouze pro čtení (`db_datareader`). Hodí se například pro demonstrační účet vyučujícího nebo pro sdílený přístup. Před spuštěním upravte uživatelské jméno a heslo ve skriptu.
+
