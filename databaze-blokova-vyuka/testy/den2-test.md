@@ -248,8 +248,15 @@ WHERE Nazev = 'Kolja';
 
 ```python
 # den2-test-11.py
-from config import DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD
+import os
+from dotenv import load_dotenv
 import mssqlpython
+
+load_dotenv()
+DB_SERVER = os.getenv("DB_SERVER")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 connection = mssqlpython.connect(
     server=DB_SERVER, database=DB_NAME,
@@ -276,8 +283,15 @@ finally:
 
 ```python
 # den2-test-12.py
-from config import DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD
+import os
+from dotenv import load_dotenv
 import mssqlpython
+
+load_dotenv()
+DB_SERVER = os.getenv("DB_SERVER")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 nazev = input("Zadejte název filmu: ")
 
@@ -308,8 +322,15 @@ finally:
 
 ```python
 # den2-test-13.py
-from config import DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD
+import os
+from dotenv import load_dotenv
 import mssqlpython
+
+load_dotenv()
+DB_SERVER = os.getenv("DB_SERVER")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 nazev = input("Název filmu: ")
 reziser = input("Režisér: ")
