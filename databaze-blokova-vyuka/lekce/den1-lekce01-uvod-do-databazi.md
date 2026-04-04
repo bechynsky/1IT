@@ -30,6 +30,22 @@ Databáze je organizovaný soubor dat uložený elektronicky. Na rozdíl od soub
 - Bankovní systém: účty, transakce
 - Školní systém: studenti, předměty, hodnocení
 
+### Jazyk SQL a dodavatelé databází
+
+Pro práci s relačními databázemi se používá standardizovaný jazyk **SQL** (Structured Query Language). Standard spravuje organizace **ISO/IEC** a průběžně se aktualizuje (SQL-92, SQL:1999, SQL:2016, SQL:2023 …).
+
+Každý dodavatel databáze však přidává **vlastní rozšíření** nad rámec standardu – liší se syntaxe některých příkazů, datové typy i pokročilé funkce. Základní příkazy (`SELECT`, `INSERT`, `UPDATE`, `DELETE`) jsou ale velmi podobné napříč všemi systémy.
+
+| Dodavatel | Databázový systém | Poznámka |
+|---|---|---|
+| Microsoft | **SQL Server / Azure SQL** | rozšíření T-SQL |
+| Oracle | **Oracle Database** | rozšíření PL/SQL |
+| Open source | **PostgreSQL** | PL/pgSQL, velmi blízko standardu |
+| Open source | **MySQL / MariaDB** | široce používané pro webové aplikace |
+| SQLite | **SQLite** | embedded databáze (mobily, prohlížeče) |
+
+> V této výuce pracujeme s **Microsoft SQL Server** (Azure SQL Database) a používáme dialekt **T-SQL**.
+
 ---
 
 ## 2. Základní pojmy (25 min)
