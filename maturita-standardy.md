@@ -148,8 +148,8 @@ JavaScript je programovací jazyk webu, jeho standardizovaná podoba se jmenuje 
 - WebRTC - audio, video a přenos dat v reálném čase
 - URL a URI - jednotný způsob zápisu adres zdrojů
 
-### Přístupnost webu
-Webové standardy řeší i to, aby byl web použitelný pro všechny uživatele, včetně lidí se znevýhodněním.
+### Přístupnost webu (WCAG)
+Webové standardy řeší i to, aby byl web použitelný pro všechny uživatele, včetně lidí se znevýhodněním. Klíčovým standardem je **WCAG** (Web Content Accessibility Guidelines) od W3C, který definuje pravidla pro přístupný web ve třech úrovních (A, AA, AAA). Zahrnuje například dostatečný kontrast textu, ovladatelnost klávesnicí, alternativní texty k obrázkům nebo správnou strukturu nadpisů. Úroveň AA je typicky vyžadována legislativou (v EU směrnice European Accessibility Act).
 
 ---
 
@@ -195,6 +195,25 @@ Datový formát určuje, jak budou informace uložené a přenesené. Když je f
 
 ---
 
+## Kódování znaků
+
+### ASCII
+Původní standard kódující 128 znaků (anglická abeceda, číslice, základní interpunkce a řídící znaky) do 7 bitů. Vznikl v 60. letech a stal se základem pro všechna pozdější kódování.
+
+### Rozšířené kódové stránky
+Pro národní znaky (háčky, čárky, azbuka apod.) vznikly **kódové stránky**, které využívaly 8. bit pro dalších 128 znaků. Problém: různé jazyky používaly různé stránky (např. Windows-1250 pro středoevropské jazyky, ISO 8859-2) a text kódovaný jednou stránkou se v jiné zobrazil špatně.
+
+### Unicode
+Univerzální znaková sada, která přiřazuje jedinečné číslo (code point) každému znaku všech světových písem. Aktuálně pokrývá přes 150 000 znaků včetně emojí.
+
+### UTF-8
+Nejrozšířenější **kódování Unicode** na webu i v souborech. Je zpětně kompatibilní s ASCII (anglický text zabírá stejně místa) a používá 1–4 bajty na znak podle potřeby. Dnes je de facto standardem pro webové stránky, API, konfigurační soubory i databáze.
+
+### Proč na kódování záleží
+Špatně zvolené nebo neoznačené kódování vede ke zmršeným znakům (tzv. mojibake). Proto je důležité vždy deklarovat kódování v HTML (`<meta charset="UTF-8">`), v databázi i při výměně dat.
+
+---
+
 ## Standardy programovacích jazyků a databází
 
 ### Programovací jazyky s formální normou
@@ -210,6 +229,9 @@ Datový formát určuje, jak budou informace uložené a přenesené. Když je f
 
 ### SQL
 SQL je standardizovaný jazyk pro práci s relačními databázemi podle ISO/IEC 9075. Jednotlivé databázové systémy ho ale často rozšiřují po svém.
+
+### POSIX
+Standard **IEEE 1003** (POSIX) definuje rozhraní operačního systému – systémová volání, příkazy shellu, proměnné prostředí a chování nástrojů (`ls`, `grep`, `awk` apod.). Díky POSIX jsou unixové systémy (Linux, macOS, BSD) vzájemně kompatibilní a software napsaný podle tohoto standardu lze přenášet mezi nimi bez úprav.
 
 ### Význam standardizace jazyků
 Je důležité rozlišovat mezi standardem jazyka a konkrétní implementací nebo nástrojem.
