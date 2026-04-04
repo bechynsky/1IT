@@ -149,7 +149,7 @@ JavaScript je programovací jazyk webu, jeho standardizovaná podoba se jmenuje 
 - URL a URI - jednotný způsob zápisu adres zdrojů
 
 ### Přístupnost webu (WCAG)
-Webové standardy řeší i to, aby byl web použitelný pro všechny uživatele, včetně lidí se znevýhodněním. Klíčovým standardem je **WCAG** (Web Content Accessibility Guidelines) od W3C, který definuje pravidla pro přístupný web ve třech úrovních (A, AA, AAA). Zahrnuje například dostatečný kontrast textu, ovladatelnost klávesnicí, alternativní texty k obrázkům nebo správnou strukturu nadpisů. Úroveň AA je typicky vyžadována legislativou (v EU směrnice European Accessibility Act).
+Standard **WCAG** (Web Content Accessibility Guidelines) od W3C definuje pravidla pro přístupný web ve třech úrovních (A, AA, AAA). Úroveň AA je typicky vyžadována legislativou, v EU ji nařizuje European Accessibility Act.
 
 ---
 
