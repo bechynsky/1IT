@@ -63,6 +63,9 @@ Organizace, která vytváří internetové standardy publikované jako RFC. Prá
 ### W3C
 Konsorcium, které rozvíjí webové standardy jako HTML, CSS a přístupnost webu.
 
+### ČSN a ÚNMZ
+České technické normy (ČSN) spravuje Česká agentura pro standardizaci pod ÚNMZ (Úřad pro technickou normalizaci, metrologii a státní zkušebnictví). Většina IT norem jsou převzaté mezinárodní standardy označované jako **ČSN ISO**, **ČSN IEC** nebo **ČSN EN ISO**. Česko je členem ISO i IEC, takže mezinárodní normy se přejímají buď překladem, nebo převzetím originálu.
+
 ### Firmy a průmyslová konsorcia
 Část standardů vzniká nejdřív v praxi u výrobců a teprve potom se formalizuje. Někdy zůstane standard pod kontrolou firem, jindy se z něj stane otevřená norma.
 
