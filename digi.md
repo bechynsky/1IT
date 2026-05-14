@@ -108,7 +108,7 @@ Student by měl umět v systému najít regionální nastavení, ukázat přípo
 
 API znamená Application Programming Interface, tedy rozhraní, přes které spolu komunikují programy. API umožňuje, aby jedna aplikace používala funkce nebo data jiné aplikace bez toho, aby znala její vnitřní kód. Když mobilní aplikace počasí zobrazí teplotu, pravděpodobně se ptá API meteorologické služby. Když e-shop ověřuje platbu, komunikuje s API platební brány.
 
-U webových aplikací se často používá REST API. REST není jeden konkrétní program, ale styl návrhu API, který využívá HTTP protokol a pracuje se zdroji. Endpoint je konkrétní URL adresa, na kterou klient posílá požadavek. Request je požadavek klienta, response je odpověď serveru. Request může obsahovat metodu, URL, hlavičky, parametry a tělo požadavku. Response obsahuje stavový kód, hlavičky a často data, například ve formátu JSON.
+U webových aplikací se často používá REST API (_Representational State Transfer Application Programming Interface_). REST není jeden konkrétní program, ale styl návrhu API, který využívá HTTP protokol a pracuje se zdroji. Endpoint je konkrétní URL adresa, na kterou klient posílá požadavek. Request je požadavek klienta, response je odpověď serveru. Request může obsahovat metodu, URL, hlavičky, parametry a tělo požadavku. Response obsahuje stavový kód, hlavičky a často data, například ve formátu JSON.
 
 HTTP metoda říká, co chceme se zdrojem udělat. `GET` načítá data, `POST` vytváří nový záznam nebo spouští operaci, `PUT` typicky nahrazuje celý záznam, `PATCH` upravuje jen část záznamu a `DELETE` maže. V praxi se například `GET /products` použije pro seznam produktů a `POST /orders` pro vytvoření objednávky.
 
