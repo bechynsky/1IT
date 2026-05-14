@@ -2,6 +2,31 @@
 
 Tento dokument slouží jako příprava k maturitním otázkám z digitálních kompetencí. Cílem není naučit se text nazpaměť, ale umět o každém tématu mluvit souvisle přibližně 15 minut: vysvětlit základní pojmy, princip fungování, uvést příklady z praxe, ukázat praktickou dovednost a zmínit rizika nebo limity.
 
+## Obsah
+
+- [Jak stavět odpověď na 15 minut](#jak-stavět-odpověď-na-15-minut)
+- [1. Síť Internet, TCP/IP, HTTP, DNS a další protokoly, CZ.NIC](#1-síť-internet-tcpip-http-dns-a-další-protokoly-cznic)
+- [2. Práce se soubory a složkami, Windows a Linux, práva, typy souborů](#2-práce-se-soubory-a-složkami-windows-a-linux-práva-typy-souborů)
+- [3. API, request, response, HTTP metody a stavové kódy](#3-api-request-response-http-metody-a-stavové-kódy)
+- [4. AI, strojové učení a generativní AI](#4-ai-strojové-učení-a-generativní-ai)
+- [5. Zabezpečení aplikací a systémů, TLS, certifikáty, autentizace a autorizace](#5-zabezpečení-aplikací-a-systémů-tls-certifikáty-autentizace-a-autorizace)
+- [6. Databáze, relační model a SQL](#6-databáze-relační-model-a-sql)
+- [7. Datové soubory JSON, XML, CSV, NoSQL databáze a scraping](#7-datové-soubory-json-xml-csv-nosql-databáze-a-scraping)
+- [8. Cloudové služby, SaaS, PaaS, IaaS, on-premise a virtualizace](#8-cloudové-služby-saas-paas-iaas-on-premise-a-virtualizace)
+- [9. Vývoj softwarového projektu, fáze, role a DevOps](#9-vývoj-softwarového-projektu-fáze-role-a-devops)
+- [10. Testování aplikací, druhy testů, prostředí, QA](#10-testování-aplikací-druhy-testů-prostředí-qa)
+- [11. UX a UI, design zaměřený na uživatele a A/B testování](#11-ux-a-ui-design-zaměřený-na-uživatele-a-ab-testování)
+- [12. Fotky, obrázky a videa na web, RGB/CMYK, bitmapa a vektor](#12-fotky-obrázky-a-videa-na-web-rgbcmyk-bitmapa-a-vektor)
+- [13. Role ve firmě, IT role, korporát, malá firma, startup a CV](#13-role-ve-firmě-it-role-korporát-malá-firma-startup-a-cv)
+- [14. Agilní metody, waterfall, Scrum, Kanban, UML a diagramy](#14-agilní-metody-waterfall-scrum-kanban-uml-a-diagramy)
+- [15. Open source, distribuované verzování, Git a GitHub/GitLab](#15-open-source-distribuované-verzování-git-a-githubgitlab)
+- [16. Sociální sítě, sběr dat, personalizace, AI a dopady na společnost](#16-sociální-sítě-sběr-dat-personalizace-ai-a-dopady-na-společnost)
+- [17. Digitální stopa, OSINT, social engineering, kyberútoky a dezinformace](#17-digitální-stopa-osint-social-engineering-kyberútoky-a-dezinformace)
+- [18. DeFi, blockchain a kryptoměny](#18-defi-blockchain-a-kryptoměny)
+- [19. IoT, internet věcí, využití, rizika a technologie](#19-iot-internet-věcí-využití-rizika-a-technologie)
+- [20. IT a právo, odpovědnost, licence, ISO, GDPR, NIS2, DORA a AI Act](#20-it-a-právo-odpovědnost-licence-iso-gdpr-nis2-dora-a-ai-act)
+- [Krátké závěrečné rady pro studenta](#krátké-závěrečné-rady-pro-studenta)
+
 ## Jak stavět odpověď na 15 minut
 
 U většiny témat funguje tato jednoduchá struktura:
