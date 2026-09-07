@@ -35,13 +35,15 @@ Po aktivaci uvidíte v terminálu prefix `(.venv)` – to znamená, že prostře
 Modul `mssql-python` je oficiální Microsoft driver pro přístup k SQL Serveru z Pythonu. Modul `python-dotenv` umožňuje načítat konfiguraci ze souboru `.env`.
 
 ```bash
-pip install mssql-python python-dotenv
+python -m pip install --upgrade mssql-python python-dotenv
 ```
+
+Aktuální verze `mssql-python` vyžaduje Python 3.10 nebo novější. Název balíčku pro instalaci obsahuje pomlčku, ale v příkazu `import` se používá podtržítko: `mssql_python`.
 
 ### Ověření instalace
 
 ```python
-import mssqlpython
+import mssql_python
 from dotenv import load_dotenv
 print("Všechny moduly jsou nainstalované!")
 ```
@@ -110,7 +112,7 @@ Vytvořte soubor `01_pripojeni.py`:
 # 01_pripojeni.py
 import os
 from dotenv import load_dotenv
-import mssqlpython
+import mssql_python
 
 # Načtení proměnných ze souboru .env
 load_dotenv()
@@ -121,11 +123,13 @@ DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 # Vytvoření připojení
-connection = mssqlpython.connect(
+connection = mssql_python.connect(
     server=DB_SERVER,
     database=DB_NAME,
-    user=DB_USER,
-    password=DB_PASSWORD
+    uid=DB_USER,
+    pwd=DB_PASSWORD,
+    encrypt="yes",
+    trust_server_certificate="no"
 )
 
 print("Připojení k databázi bylo úspěšné!")
@@ -154,7 +158,7 @@ print("Připojení uzavřeno.")
 
 1. `load_dotenv()` – načte proměnné ze souboru `.env`
 2. `os.getenv("DB_SERVER")` – přečte hodnotu proměnné prostředí
-3. `mssqlpython.connect(...)` – vytvoří spojení s databází
+3. `mssql_python.connect(...)` – vytvoří spojení s databází; parametry `uid` a `pwd` odpovídají connection stringu SQL Serveru
 4. `connection.cursor()` – vytvoří kurzor (objekt pro provádění dotazů)
 5. `cursor.execute(sql)` – provede SQL dotaz
 6. `cursor.fetchall()` – načte všechny řádky výsledku jako seznam
@@ -172,7 +176,7 @@ Vytvořte soubor `02_cteni_dat.py`:
 # 02_cteni_dat.py
 import os
 from dotenv import load_dotenv
-import mssqlpython
+import mssql_python
 
 load_dotenv()
 DB_SERVER = os.getenv("DB_SERVER")
@@ -180,11 +184,13 @@ DB_NAME = os.getenv("DB_NAME")
 DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
 
-connection = mssqlpython.connect(
+connection = mssql_python.connect(
     server=DB_SERVER,
     database=DB_NAME,
-    user=DB_USER,
-    password=DB_PASSWORD
+    uid=DB_USER,
+    pwd=DB_PASSWORD,
+    encrypt="yes",
+    trust_server_certificate="no"
 )
 cursor = connection.cursor()
 
@@ -236,7 +242,7 @@ connection.close()
 # 03_parametry.py
 import os
 from dotenv import load_dotenv
-import mssqlpython
+import mssql_python
 
 load_dotenv()
 DB_SERVER = os.getenv("DB_SERVER")
@@ -244,11 +250,13 @@ DB_NAME = os.getenv("DB_NAME")
 DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
 
-connection = mssqlpython.connect(
+connection = mssql_python.connect(
     server=DB_SERVER,
     database=DB_NAME,
-    user=DB_USER,
-    password=DB_PASSWORD
+    uid=DB_USER,
+    pwd=DB_PASSWORD,
+    encrypt="yes",
+    trust_server_certificate="no"
 )
 cursor = connection.cursor()
 
@@ -284,13 +292,13 @@ Vysvětlení:
 
 ### Context manager pattern
 
-Použití `with` zajistí, že se připojení uzavře i v případě chyby. Vlastní wrapper:
+Objekty připojení i kurzoru podporují `with`. Připojení se při úspěchu automaticky potvrdí (`commit`), při chybě vrátí změny (`rollback`) a nakonec se vždy uzavře. Kurzor se při opuštění svého bloku automaticky uzavře.
 
 ```python
 # 04_with_pattern.py
 import os
 from dotenv import load_dotenv
-import mssqlpython
+import mssql_python
 
 load_dotenv()
 DB_SERVER = os.getenv("DB_SERVER")
@@ -300,37 +308,34 @@ DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 def get_connection():
     """Vytvoří a vrátí připojení k databázi."""
-    return mssqlpython.connect(
+    return mssql_python.connect(
         server=DB_SERVER,
         database=DB_NAME,
-        user=DB_USER,
-        password=DB_PASSWORD
+        uid=DB_USER,
+        pwd=DB_PASSWORD,
+        encrypt="yes",
+        trust_server_certificate="no"
     )
 
-# Bezpečný přístup – try/finally
-connection = get_connection()
-try:
-    cursor = connection.cursor()
-    cursor.execute("""
-        SELECT
-            c.FirstName + ' ' + c.LastName AS Zakaznik,
-            COUNT(o.SalesOrderID) AS PocetObjednavek
-        FROM SalesLT.Customer AS c
-        LEFT JOIN SalesLT.SalesOrderHeader AS o
-            ON c.CustomerID = o.CustomerID
-        GROUP BY c.FirstName, c.LastName
-        HAVING COUNT(o.SalesOrderID) > 0
-        ORDER BY PocetObjednavek DESC
-    """)
+with get_connection() as connection:
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            SELECT
+                c.FirstName + ' ' + c.LastName AS Zakaznik,
+                COUNT(o.SalesOrderID) AS PocetObjednavek
+            FROM SalesLT.Customer AS c
+            LEFT JOIN SalesLT.SalesOrderHeader AS o
+                ON c.CustomerID = o.CustomerID
+            GROUP BY c.FirstName, c.LastName
+            HAVING COUNT(o.SalesOrderID) > 0
+            ORDER BY PocetObjednavek DESC
+        """)
 
-    print("Zákazníci s objednávkami:")
-    for row in cursor:
-        print(f"  {row[0]}: {row[1]} objednávek")
+        print("Zákazníci s objednávkami:")
+        for row in cursor:
+            print(f"  {row[0]}: {row[1]} objednávek")
 
-    cursor.close()
-finally:
-    connection.close()
-    print("\nPřipojení uzavřeno.")
+print("\nPřipojení uzavřeno.")
 ```
 
 ---
@@ -343,7 +348,7 @@ finally:
 # 05_report_kategorie.py
 import os
 from dotenv import load_dotenv
-import mssqlpython
+import mssql_python
 
 load_dotenv()
 DB_SERVER = os.getenv("DB_SERVER")
@@ -351,11 +356,13 @@ DB_NAME = os.getenv("DB_NAME")
 DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
 
-connection = mssqlpython.connect(
+connection = mssql_python.connect(
     server=DB_SERVER,
     database=DB_NAME,
-    user=DB_USER,
-    password=DB_PASSWORD
+    uid=DB_USER,
+    pwd=DB_PASSWORD,
+    encrypt="yes",
+    trust_server_certificate="no"
 )
 cursor = connection.cursor()
 
@@ -415,7 +422,7 @@ Napište skript, který zobrazí:
 # Úkol 1: Vyhledávač produktů
 import os
 from dotenv import load_dotenv
-import mssqlpython
+import mssql_python
 
 load_dotenv()
 DB_SERVER = os.getenv("DB_SERVER")
@@ -425,9 +432,10 @@ DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 hledany_text = input("Zadejte hledaný text v názvu produktu: ")
 
-connection = mssqlpython.connect(
+connection = mssql_python.connect(
     server=DB_SERVER, database=DB_NAME,
-    user=DB_USER, password=DB_PASSWORD
+    uid=DB_USER, pwd=DB_PASSWORD,
+    encrypt="yes", trust_server_certificate="no"
 )
 cursor = connection.cursor()
 
@@ -454,7 +462,7 @@ connection.close()
 # Úkol 2: Statistika objednávek
 import os
 from dotenv import load_dotenv
-import mssqlpython
+import mssql_python
 
 load_dotenv()
 DB_SERVER = os.getenv("DB_SERVER")
@@ -462,9 +470,10 @@ DB_NAME = os.getenv("DB_NAME")
 DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
 
-connection = mssqlpython.connect(
+connection = mssql_python.connect(
     server=DB_SERVER, database=DB_NAME,
-    user=DB_USER, password=DB_PASSWORD
+    uid=DB_USER, pwd=DB_PASSWORD,
+    encrypt="yes", trust_server_certificate="no"
 )
 cursor = connection.cursor()
 

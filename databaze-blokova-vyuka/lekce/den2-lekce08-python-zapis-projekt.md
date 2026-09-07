@@ -19,7 +19,7 @@ Python dokáže spouštět libovolné SQL příkazy, včetně `CREATE TABLE`:
 # 06_vytvoreni_tabulky.py
 import os
 from dotenv import load_dotenv
-import mssqlpython
+import mssql_python
 
 load_dotenv()
 DB_SERVER = os.getenv("DB_SERVER")
@@ -27,11 +27,13 @@ DB_NAME = os.getenv("DB_NAME")
 DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
 
-connection = mssqlpython.connect(
+connection = mssql_python.connect(
     server=DB_SERVER,
     database=DB_NAME,
-    user=DB_USER,
-    password=DB_PASSWORD
+    uid=DB_USER,
+    pwd=DB_PASSWORD,
+    encrypt="yes",
+    trust_server_certificate="no"
 )
 cursor = connection.cursor()
 
@@ -73,7 +75,7 @@ Vysvětlení:
 # 07_vlozeni_dat.py
 import os
 from dotenv import load_dotenv
-import mssqlpython
+import mssql_python
 
 load_dotenv()
 DB_SERVER = os.getenv("DB_SERVER")
@@ -81,11 +83,13 @@ DB_NAME = os.getenv("DB_NAME")
 DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
 
-connection = mssqlpython.connect(
+connection = mssql_python.connect(
     server=DB_SERVER,
     database=DB_NAME,
-    user=DB_USER,
-    password=DB_PASSWORD
+    uid=DB_USER,
+    pwd=DB_PASSWORD,
+    encrypt="yes",
+    trust_server_certificate="no"
 )
 cursor = connection.cursor()
 
@@ -108,7 +112,7 @@ connection.close()
 # 08_vlozeni_vice.py
 import os
 from dotenv import load_dotenv
-import mssqlpython
+import mssql_python
 
 load_dotenv()
 DB_SERVER = os.getenv("DB_SERVER")
@@ -123,11 +127,13 @@ kontakty = [
     ("Martin", "Svoboda", "martin@email.cz", "721888999", None),
 ]
 
-connection = mssqlpython.connect(
+connection = mssql_python.connect(
     server=DB_SERVER,
     database=DB_NAME,
-    user=DB_USER,
-    password=DB_PASSWORD
+    uid=DB_USER,
+    pwd=DB_PASSWORD,
+    encrypt="yes",
+    trust_server_certificate="no"
 )
 cursor = connection.cursor()
 
@@ -163,7 +169,7 @@ connection.close()
 # 09_aktualizace.py
 import os
 from dotenv import load_dotenv
-import mssqlpython
+import mssql_python
 
 load_dotenv()
 DB_SERVER = os.getenv("DB_SERVER")
@@ -171,11 +177,13 @@ DB_NAME = os.getenv("DB_NAME")
 DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
 
-connection = mssqlpython.connect(
+connection = mssql_python.connect(
     server=DB_SERVER,
     database=DB_NAME,
-    user=DB_USER,
-    password=DB_PASSWORD
+    uid=DB_USER,
+    pwd=DB_PASSWORD,
+    encrypt="yes",
+    trust_server_certificate="no"
 )
 cursor = connection.cursor()
 
@@ -211,7 +219,7 @@ connection.close()
 # 10_mazani.py
 import os
 from dotenv import load_dotenv
-import mssqlpython
+import mssql_python
 
 load_dotenv()
 DB_SERVER = os.getenv("DB_SERVER")
@@ -219,11 +227,13 @@ DB_NAME = os.getenv("DB_NAME")
 DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
 
-connection = mssqlpython.connect(
+connection = mssql_python.connect(
     server=DB_SERVER,
     database=DB_NAME,
-    user=DB_USER,
-    password=DB_PASSWORD
+    uid=DB_USER,
+    pwd=DB_PASSWORD,
+    encrypt="yes",
+    trust_server_certificate="no"
 )
 cursor = connection.cursor()
 
@@ -263,7 +273,7 @@ Transakce zajistí, že se buď provedou **všechny** změny, nebo **žádná**.
 # 11_transakce.py
 import os
 from dotenv import load_dotenv
-import mssqlpython
+import mssql_python
 
 load_dotenv()
 DB_SERVER = os.getenv("DB_SERVER")
@@ -271,11 +281,13 @@ DB_NAME = os.getenv("DB_NAME")
 DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
 
-connection = mssqlpython.connect(
+connection = mssql_python.connect(
     server=DB_SERVER,
     database=DB_NAME,
-    user=DB_USER,
-    password=DB_PASSWORD
+    uid=DB_USER,
+    pwd=DB_PASSWORD,
+    encrypt="yes",
+    trust_server_certificate="no"
 )
 cursor = connection.cursor()
 
@@ -352,7 +364,7 @@ Vytvořte kompletní aplikaci pro správu kontaktů s textovým menu:
 # projekt_kontakty.py
 import os
 from dotenv import load_dotenv
-import mssqlpython
+import mssql_python
 
 load_dotenv()
 DB_SERVER = os.getenv("DB_SERVER")
@@ -366,11 +378,13 @@ SCHEMA = "studentXX"
 
 def get_connection():
     """Vytvoří připojení k databázi."""
-    return mssqlpython.connect(
+    return mssql_python.connect(
         server=DB_SERVER,
         database=DB_NAME,
-        user=DB_USER,
-        password=DB_PASSWORD
+        uid=DB_USER,
+        pwd=DB_PASSWORD,
+        encrypt="yes",
+        trust_server_certificate="no"
     )
 
 
