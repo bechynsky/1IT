@@ -83,3 +83,57 @@ DECLARE @UserPrefix SYSNAME = N'student';  -- prefix jména (student01, student0
 
 Skript [`setup/add_readonly_user.sql`](setup/add_readonly_user.sql) vytvoří uživatele s oprávněním pouze pro čtení (`db_datareader`). Hodí se například pro demonstrační účet vyučujícího nebo pro sdílený přístup. Před spuštěním upravte uživatelské jméno a heslo ve skriptu.
 
+## Audit přihlášení a aktivity studentů
+
+Azure SQL Auditing umožňuje vyučujícímu ověřit, kdy se jednotliví studenti připojili k databázi a jaké typy databázových akcí prováděli. Samotné úspěšné přihlášení potvrzuje pouze navázání spojení. Pro kontrolu práce na úkolu sledujte také sloupec `action_name_s` a navazující události dotazů nebo změn v databázi.
+
+### Zapnutí auditu do Log Analytics
+
+1. V Azure Portal otevřete vytvořený **SQL server** nebo konkrétní **SQL database**.
+2. V části **Auditing** zapněte auditování.
+3. Jako cíl zvolte **Log Analytics workspace** a vyberte pracovní prostor, do kterého se mají auditní záznamy odesílat.
+4. Nastavení uložte a proveďte zkušební přihlášení studentským účtem. První záznamy se mohou objevit s několikaminutovým zpožděním.
+5. Otevřete vybraný Log Analytics workspace, přejděte do části **Logs** a spusťte KQL dotaz níže.
+
+Audit nastavujte buď na úrovni serveru, nebo databáze. Současné zapnutí na obou úrovních může vytvářet duplicitní záznamy. Pro čtení logů potřebuje vyučující například roli **Log Analytics Reader** nad daným workspace.
+
+### Přehled posledních auditních událostí
+
+```kql
+AzureDiagnostics
+| where Category == "SQLSecurityAuditEvents"
+| project TimeGenerated,
+          server_principal_name_s,
+          database_name_s,
+          client_ip_s,
+          action_name_s 
+| order by TimeGenerated desc
+```
+
+Význam sloupců:
+
+| Sloupec | Význam |
+|---|---|
+| `TimeGenerated` | Čas zaznamenání události v UTC |
+| `server_principal_name_s` | Přihlášený databázový uživatel, například `student01` |
+| `database_name_s` | Databáze, ve které událost vznikla |
+| `client_ip_s` | Veřejná IP adresa klienta |
+| `action_name_s` | Název provedené nebo auditované akce |
+
+Pro rychlejší kontrolu konkrétní hodiny lze dotaz omezit časem a studentem:
+
+```kql
+AzureDiagnostics
+| where TimeGenerated > ago(2h)
+| where Category == "SQLSecurityAuditEvents"
+| where server_principal_name_s == "student01"
+| project TimeGenerated,
+          server_principal_name_s,
+          database_name_s,
+          client_ip_s,
+          action_name_s
+| order by TimeGenerated desc
+```
+
+Auditní data obsahují identifikátory uživatelů a IP adresy. Přístup k nim omezte pouze na pověřené osoby, nastavte přiměřenou dobu uchování a používejte je v souladu se školními pravidly a zásadami ochrany osobních údajů.
+
