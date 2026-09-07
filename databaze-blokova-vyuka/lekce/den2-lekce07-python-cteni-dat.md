@@ -127,9 +127,13 @@ connection = mssql_python.connect(
     server=DB_SERVER,
     database=DB_NAME,
     uid=DB_USER,
+<<<<<<< HEAD
     pwd=DB_PASSWORD,
     encrypt="yes",
     trust_server_certificate="no"
+=======
+    pwd=DB_PASSWORD
+>>>>>>> 871a1582ca357a2ef06434fe1dbb039e743ad5eb
 )
 
 print("Připojení k databázi bylo úspěšné!")
@@ -188,9 +192,13 @@ connection = mssql_python.connect(
     server=DB_SERVER,
     database=DB_NAME,
     uid=DB_USER,
+<<<<<<< HEAD
     pwd=DB_PASSWORD,
     encrypt="yes",
     trust_server_certificate="no"
+=======
+    pwd=DB_PASSWORD
+>>>>>>> 871a1582ca357a2ef06434fe1dbb039e743ad5eb
 )
 cursor = connection.cursor()
 
@@ -254,9 +262,13 @@ connection = mssql_python.connect(
     server=DB_SERVER,
     database=DB_NAME,
     uid=DB_USER,
+<<<<<<< HEAD
     pwd=DB_PASSWORD,
     encrypt="yes",
     trust_server_certificate="no"
+=======
+    pwd=DB_PASSWORD
+>>>>>>> 871a1582ca357a2ef06434fe1dbb039e743ad5eb
 )
 cursor = connection.cursor()
 
@@ -312,9 +324,13 @@ def get_connection():
         server=DB_SERVER,
         database=DB_NAME,
         uid=DB_USER,
+<<<<<<< HEAD
         pwd=DB_PASSWORD,
         encrypt="yes",
         trust_server_certificate="no"
+=======
+        pwd=DB_PASSWORD
+>>>>>>> 871a1582ca357a2ef06434fe1dbb039e743ad5eb
     )
 
 with get_connection() as connection:
@@ -360,9 +376,13 @@ connection = mssql_python.connect(
     server=DB_SERVER,
     database=DB_NAME,
     uid=DB_USER,
+<<<<<<< HEAD
     pwd=DB_PASSWORD,
     encrypt="yes",
     trust_server_certificate="no"
+=======
+    pwd=DB_PASSWORD
+>>>>>>> 871a1582ca357a2ef06434fe1dbb039e743ad5eb
 )
 cursor = connection.cursor()
 
@@ -434,8 +454,12 @@ hledany_text = input("Zadejte hledaný text v názvu produktu: ")
 
 connection = mssql_python.connect(
     server=DB_SERVER, database=DB_NAME,
+<<<<<<< HEAD
     uid=DB_USER, pwd=DB_PASSWORD,
     encrypt="yes", trust_server_certificate="no"
+=======
+    uid=DB_USER, pwd=DB_PASSWORD
+>>>>>>> 871a1582ca357a2ef06434fe1dbb039e743ad5eb
 )
 cursor = connection.cursor()
 
@@ -472,8 +496,12 @@ DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 connection = mssql_python.connect(
     server=DB_SERVER, database=DB_NAME,
+<<<<<<< HEAD
     uid=DB_USER, pwd=DB_PASSWORD,
     encrypt="yes", trust_server_certificate="no"
+=======
+    uid=DB_USER, pwd=DB_PASSWORD
+>>>>>>> 871a1582ca357a2ef06434fe1dbb039e743ad5eb
 )
 cursor = connection.cursor()
 
