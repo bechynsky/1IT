@@ -120,6 +120,29 @@ Význam sloupců:
 | `client_ip_s` | Veřejná IP adresa klienta |
 | `action_name_s` | Název provedené nebo auditované akce |
 
+### Studenti přihlášení během poslední hodiny
+
+Následující dotaz vypíše unikátní uživatelské účty, které se během poslední hodiny úspěšně přihlásily k databázi:
+
+```kql
+AzureDiagnostics
+| where Category == "SQLSecurityAuditEvents"
+| where action_name_s == "DATABASE AUTHENTICATION SUCCEEDED"
+| where TimeGenerated > ago(1h)
+| summarize by server_principal_name_s
+| sort by server_principal_name_s
+```
+
+Dotaz postupně:
+
+1. Vybere auditní události zabezpečení Azure SQL.
+2. Ponechá pouze úspěšná přihlášení k databázi.
+3. Omezí výsledky na posledních 60 minut.
+4. Pomocí `summarize by` sloučí opakovaná přihlášení stejného účtu do jednoho řádku.
+5. Seřadí uživatelská jména abecedně.
+
+Výsledkem je seznam studentů, kteří se v daném období alespoň jednou úspěšně připojili. Dotaz neukazuje počet ani čas jednotlivých přihlášení a sám o sobě nedokládá práci na úkolu. Tu je potřeba ověřit pomocí dalších auditních událostí.
+
 Pro rychlejší kontrolu konkrétní hodiny lze dotaz omezit časem a studentem:
 
 ```kql
