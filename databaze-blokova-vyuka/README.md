@@ -83,6 +83,27 @@ DECLARE @UserPrefix SYSNAME = N'student';  -- prefix jména (student01, student0
 
 Skript [`setup/add_readonly_user.sql`](setup/add_readonly_user.sql) vytvoří uživatele s oprávněním pouze pro čtení (`db_datareader`). Hodí se například pro demonstrační účet vyučujícího nebo pro sdílený přístup. Před spuštěním upravte uživatelské jméno a heslo ve skriptu.
 
+## Aktuálně připojení studenti
+
+Vyučující může v cílové databázi zobrazit právě otevřená studentská připojení pomocí dynamického systémového pohledu `sys.dm_exec_sessions`:
+
+```sql
+SELECT
+    login_name,
+    host_name,
+    program_name,
+    login_time,
+    status
+FROM sys.dm_exec_sessions
+WHERE is_user_process = 1
+  AND login_name LIKE N'student%'
+ORDER BY login_name, login_time;
+```
+
+Každý řádek představuje jednu relaci, takže jeden student může být uveden vícekrát. Stav `running` označuje právě prováděný požadavek, zatímco `sleeping` znamená, že připojení zůstává otevřené, ale aktuálně žádný požadavek neprovádí. Dotaz spusťte pod účtem správce; pro zobrazení všech relací v Azure SQL Database je potřeba oprávnění `VIEW DATABASE STATE`. Toto oprávnění studentům nepřidělujte.
+
+Pohled ukazuje pouze aktuální relace. Pro zjištění dřívějších přihlášení použijte auditní záznamy popsané níže.
+
 ## Audit přihlášení a aktivity studentů
 
 Azure SQL Auditing umožňuje vyučujícímu ověřit, kdy se jednotliví studenti připojili k databázi a jaké typy databázových akcí prováděli. Samotné úspěšné přihlášení potvrzuje pouze navázání spojení. Pro kontrolu práce na úkolu sledujte také sloupec `action_name_s` a navazující události dotazů nebo změn v databázi.
